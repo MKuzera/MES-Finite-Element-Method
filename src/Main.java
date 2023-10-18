@@ -8,6 +8,7 @@ public class Main {
         // "Test2_4_4_MixGrid.txt"
         // "Test3_31_31_kwadrat.txt"
         DataImporter.importData("Test1_4_4.txt");
+        System.out.println(GlobalData.getDescription());
         System.out.println("\nnodes: "+ GlobalData.nodesNumber+"\n"+GlobalData.nodesToString());
         System.out.println("\nelements: "+ GlobalData.elementsNumber+"\n"+GlobalData.elementsToString());
 

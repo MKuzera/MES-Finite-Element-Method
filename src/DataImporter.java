@@ -6,31 +6,28 @@ import java.util.ArrayList;
 
 public class DataImporter {
 
-    private static FileReader fileReader = null;
-    private static BufferedReader reader = null;
-    private static ArrayList<String> globalData = new ArrayList<>(10);
+
     private static ArrayList<Node> nodes;
     private static ArrayList<Element> elements;
     public static void importData(String fileName){
 
-        int counter = 0;
         ArrayList<String> allLines = new ArrayList<>();
-        try {
-            fileReader = new FileReader(fileName);
-            reader = new BufferedReader(fileReader);
-            String nextLine = null;
+        try(
+                FileReader fileReader = new FileReader(fileName);
+                BufferedReader reader = new BufferedReader(fileReader))
+        {
+            String nextLine;
             while ((nextLine = reader.readLine()) != null) {
                 allLines.add(nextLine);
             }
 
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new Exceptions.FileNotFoundException("File not found : " + fileName);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("IO exception at DataImporter.java");
         }
 
         implementGlobalData(new ArrayList<>(allLines.subList(0,10)));
-        System.out.println(GlobalData.getDescription());
         initializeNodes();
         addNodes(new ArrayList<>(allLines.subList(11,11 + (GlobalData.nodesNumber))));
         initializeElements();

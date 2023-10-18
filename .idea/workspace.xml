@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GlobalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GlobalData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test2_4_4_MixGrid.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test3_31_31_kwadrat.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,8 +70,16 @@
       <updated>1697122120066</updated>
       <workItem from="1697122121268" duration="4204000" />
       <workItem from="1697558859387" duration="4701000" />
-      <workItem from="1697612114127" duration="2820000" />
+      <workItem from="1697612114127" duration="3587000" />
     </task>
+    <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
+      <created>1697615376809</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1697615376809</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -92,5 +95,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-" />
   </component>
 </project>

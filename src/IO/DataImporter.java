@@ -1,10 +1,16 @@
+package IO;
+
+import Data.*;
+
+
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataImporter {
+public abstract class DataImporter {
 
 
     private static ArrayList<Node> nodes;
@@ -24,7 +30,7 @@ public class DataImporter {
         } catch (FileNotFoundException e) {
             throw new Exceptions.FileNotFoundException("File not found : " + fileName);
         } catch (IOException e) {
-            throw new RuntimeException("IO exception at DataImporter.java");
+            throw new RuntimeException("IO exception at IO.DataImporter.java");
         }
 
         implementGlobalData(new ArrayList<>(allLines.subList(0,10)));

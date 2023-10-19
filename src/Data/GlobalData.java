@@ -1,19 +1,20 @@
+package Data;
+
 import java.util.ArrayList;
-import java.util.Stack;
 
 public abstract class GlobalData {
-    static double simulationTime;
-    static double simulationStepTime;
-    static double conductivity;
-    static double alfa;
-    static double Tot;
-    static double initialTemp;
-    static double density;
-    static double specificHeat;
-    static int nodesNumber;
-    static int elementsNumber;
-    static ArrayList<Node> nodes;
-    static ArrayList<Element> elements;
+    public static double simulationTime;
+    public static double simulationStepTime;
+    public static double conductivity;
+    public static double alfa;
+    public static double Tot;
+    public static double initialTemp;
+    public static double density;
+    public  static double specificHeat;
+    public static int nodesNumber;
+    public  static int elementsNumber;
+    public  static ArrayList<Node> nodes;
+    public static ArrayList<Element> elements;
 
     public static void setNodes(ArrayList<Node> nodes){
         GlobalData.nodes = nodes;

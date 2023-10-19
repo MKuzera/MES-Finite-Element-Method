@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" afterDir="false" />
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added: &#10;-Exceptions&#10;-Quick cleaning&#10;-">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Data/Grid.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/BadDataException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Functions/MyFunctionX.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Functions/MyFunctionXY.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Gauss/GaussInterpolation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Gauss/GaussTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test1_4_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/Test1_4_4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test2_4_4_MixGrid.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/Test2_4_4_MixGrid.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test3_31_31_kwadrat.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/Test3_31_31_kwadrat.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/DataImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/GlobalData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Grid.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +31,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -34,18 +48,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\MES_Projekt_Java\MES" />
+      <recent name="E:\MES_Projekt_Java\MES\src\IO" />
+      <recent name="E:\MES_Projekt_Java\MES\src" />
+      <recent name="E:\MES_Projekt_Java\MES\src\Files" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -70,7 +93,9 @@
       <updated>1697122120066</updated>
       <workItem from="1697122121268" duration="4204000" />
       <workItem from="1697558859387" duration="4701000" />
-      <workItem from="1697612114127" duration="3587000" />
+      <workItem from="1697612114127" duration="3825000" />
+      <workItem from="1697721763931" duration="3761000" />
+      <workItem from="1697726547343" duration="3943000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -79,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697615376809</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added: &#10;-Exceptions&#10;-Quick cleaning&#10;-">
+      <created>1697615950903</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1697615950903</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -98,6 +130,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-" />
+    <MESSAGE value="Added: &#10;-Exceptions&#10;-Quick cleaning&#10;-" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added: &#10;-Exceptions&#10;-Quick cleaning&#10;-" />
   </component>
 </project>

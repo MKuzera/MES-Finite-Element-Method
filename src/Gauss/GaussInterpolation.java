@@ -1,6 +1,6 @@
 package Gauss;
 import Functions.*;
-public class GaussInterpolation {
+public abstract class GaussInterpolation {
     private static GaussTable gaussTable;
 
     public static double calculateX(int k, MyFunctionX f){
@@ -8,7 +8,7 @@ public class GaussInterpolation {
         double result = 0.0;
 
         for (int i =0; i<k; i++){
-            result = result + (gaussTable.weights.get(i)* f.funkcja(gaussTable.pointsNum.get(i)));
+            result = result + (gaussTable.weights.get(i)* f.fun(gaussTable.pointsNum.get(i)));
         }
          return result;
     }
@@ -19,7 +19,7 @@ public class GaussInterpolation {
 
         for (int i =0; i<k; i++){
             for(int j = 0; j<k;j++) {
-                result = result + (gaussTable.weights.get(i) *gaussTable.weights.get(j) * f.funkcja(gaussTable.pointsNum.get(i),gaussTable.pointsNum.get(j)));
+                result = result + (gaussTable.weights.get(i) *gaussTable.weights.get(j) * f.fun(gaussTable.pointsNum.get(i),gaussTable.pointsNum.get(j)));
             }
         }
         return result;

@@ -13,12 +13,12 @@ public class Main {
         // "src\IO\Test2_4_4_MixGrid.txt"
         // "src\IO\Test3_31_31_kwadrat.txt"
 
-        DataImporter.importData("src\\IO\\Test1_4_4.txt");
-        System.out.println(GlobalData.getDescription());
-        System.out.println("\nnodes: "+ GlobalData.nodesNumber+"\n"+GlobalData.nodesToString());
-        System.out.println("\nelements: "+ GlobalData.elementsNumber+"\n"+GlobalData.elementsToString());
+        //DataImporter.importData("src\\IO\\Test1_4_4.txt");
+        // System.out.println(GlobalData.getDescription());
+        // System.out.println("\nnodes: "+ GlobalData.nodesNumber+"\n"+GlobalData.nodesToString());
+        //  System.out.println("\nelements: "+ GlobalData.elementsNumber+"\n"+GlobalData.elementsToString());
 
-        Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
+        // Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
 
 
         MyFunctionX myFunctionX = x -> 5*x * x + 3 * x + 6;
@@ -26,6 +26,7 @@ public class Main {
 
         MyFunctionXY myFunctionXY = (x, y) -> 5*x * x *y*y + 3*x*y +6;
         System.out.println(GaussInterpolation.calculateXY(3, myFunctionXY));
+
 
 
 

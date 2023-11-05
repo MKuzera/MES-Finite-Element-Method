@@ -3,12 +3,34 @@ package Data;
 import java.util.ArrayList;
 
 public class ElementUniversal {
-    Double[][] mesh;
+    // podczas liczenia pochodnych za ksi i eta wstawiamy punkty calkowania
+    // ?
+    Double[][] meshKsi;
+    Double [][] meshEta;
+    private Integer pointsOfIntegral;
+    private Integer arraySizeBasedOnPointsOfIntegral;
+
     // pointsOfIntegral - punkty calkowania
-    // mesh - siatka? tak google tlumaczy
+    // mesh - siatka
+
     public ElementUniversal(int pointsOfIntegral){
-        mesh = new Double[4][pointsOfIntegral*pointsOfIntegral];
+        this.pointsOfIntegral =pointsOfIntegral;
+        this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral*pointsOfIntegral;
+        meshEta = new Double[4][arraySizeBasedOnPointsOfIntegral];
+        meshKsi = new Double[4][arraySizeBasedOnPointsOfIntegral];
     }
+
+    public void initEtaKsi(){
+
+    }
+
+
+
+
+
+
+
+    // polowa gotowych funkcji:
 
     // ξ - ksi
 
@@ -33,11 +55,11 @@ public class ElementUniversal {
     private double dN2dn(Double n){
         return -0.25*(1+n);
     }
-    private double dN3dn(Double n){
-        return 0.25*(1+n);
-    }
+    private double dN3dn(Double n){ return 0.25*(1+n);}
     private double dN4dn(Double n){
         return 0.25*(1-n);
     }
+
+
 }
 

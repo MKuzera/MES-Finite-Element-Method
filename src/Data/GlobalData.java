@@ -12,9 +12,10 @@ public abstract class GlobalData {
     public static double density;
     public  static double specificHeat;
     public static int nodesNumber;
-    public  static int elementsNumber;
-    public  static ArrayList<Node> nodes;
+    public static int elementsNumber;
+    public static ArrayList<Node> nodes;
     public static ArrayList<Element> elements;
+
 
     public static void setNodes(ArrayList<Node> nodes){
         GlobalData.nodes = nodes;

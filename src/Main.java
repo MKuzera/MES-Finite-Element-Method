@@ -27,7 +27,7 @@ public class Main {
       //  MyFunctionXY myFunctionXY = (x, y) -> 5*x * x *y*y + 3*x*y +6;
       //  System.out.println(GaussInterpolation.calculateXY(3, myFunctionXY));
 
-        ElementUniversal elementUniversal = new ElementUniversal(3);
+        ElementUniversal elementUniversal = new ElementUniversal(2);
         elementUniversal.printKsiEta();
 
 

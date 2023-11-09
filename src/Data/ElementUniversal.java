@@ -10,6 +10,7 @@ public class ElementUniversal {
     Double [][] dNdEta;
     private Integer pointsOfIntegral;
     private Integer arraySizeBasedOnPointsOfIntegral;
+    private Double[][] matrixH;
 
     public Double[][] getdNdKsi() {
         return dNdKsi;
@@ -45,6 +46,7 @@ public class ElementUniversal {
 
                 initKsiEtaCalcPointsArray();
                 initdNdKsidNdEta();
+                calcMatrixH();
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
@@ -52,20 +54,99 @@ public class ElementUniversal {
 
     }
 
+    private void calcMatrixH(){
+        Double[] x = new Double[]{0.0 , 0.025 , 0.025,0.0};
+        Double[] y = new Double[]{0.0 , 0.0 , 0.025,0.025};
+
+        Double[][] dNdX = new Double[4][4];
+        Double[][] dNdY = new Double[4][4];
+
+        for (int i =0; i< 4;i++) {
+
+            Double dXdKsi = dNdKsi[i][0] * x[0] + dNdKsi[i][1] * x[1] + dNdKsi[i][2] * x[2] + dNdKsi[i][3] * x[3];
+            Double dXdEta = dNdEta[i][0] * x[0] + dNdEta[i][1] * x[1] + dNdEta[i][2] * x[2] + dNdEta[i][3] * x[3];
+            Double dYdKsi = dNdKsi[i][0] * y[0] + dNdKsi[i][1] * y[1] + dNdKsi[i][2] * y[2] + dNdKsi[i][3] * y[3];
+            Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
+
+            Double[][] matrx = new Double[2][2];
+            matrx[0][0] = dXdKsi;
+            matrx[0][1] = dYdKsi;
+            matrx[1][0] = dXdEta;
+            matrx[1][1] = dYdEta;
+
+            System.out.println("XXXXXXXXXXXXXXX");
+            System.out.println(matrx[0][0] + " " + matrx[0][1]);
+            System.out.println(matrx[1][0] + " " + matrx[1][1]);
+
+            Double det = matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
+            Double oneByDet = 1.0 / det;
+            System.out.println(oneByDet);
+
+            matrx[0][0] = matrx[0][0] * oneByDet;
+            matrx[0][1] = matrx[0][1] * oneByDet;
+            matrx[1][0] = matrx[1][0] * oneByDet;
+            matrx[1][1] = matrx[1][1] * oneByDet;
+
+            System.out.println(matrx[0][0] + " " + matrx[0][1]);
+            System.out.println(matrx[1][0] + " " + matrx[1][1]);
+
+
+
+            for (int k = 0; k < 4; k++) {
+                dNdX[i][k] = matrx[0][0]*dNdKsi[i][k] + matrx[0][1]*dNdEta[i][k];
+                dNdY[i][k] = matrx[1][0]*dNdKsi[i][k] + matrx[1][1]*dNdEta[i][k];
+            }
+
+
+        }
+
+
+        System.out.println("Wynik dNdx");
+
+        for (int j = 0; j < 4; j++) {
+            for (int l = 0; l < 4; l++) {
+                System.out.print(dNdX[j][l] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("dndy");
+        for (int j = 0; j < 4; j++) {
+            for (int l = 0; l < 4; l++) {
+                System.out.print(dNdY[j][l] + " ");
+            }
+            System.out.println();
+        }
+
+        for(int i =0; i<4;i++){
+            matrixTimesTransMatrix(dNdX[0]);
+        }
+
+
+    }
+
+    private void matrixTimesTransMatrix(Double[] matrix) {
+        // to do
+        for (Double d:matrix) {
+
+        }
+    }
+
+
     private void initdNdKsidNdEta() {
 
             for(int i =0;i<arraySizeBasedOnPointsOfIntegral;i++) {
 
 
-                dNdKsi[0][i] = dN1dS(etaArray[i]);
-                dNdKsi[1][i] = dN2dS(etaArray[i]);
-                dNdKsi[2][i] = dN3dS(etaArray[i]);
-                dNdKsi[3][i] = dN4dS(etaArray[i]);
+                dNdKsi[i][0] = dN1dS(etaArray[i]);
+                dNdKsi[i][1] = dN2dS(etaArray[i]);
+                dNdKsi[i][2] = dN3dS(etaArray[i]);
+                dNdKsi[i][3] = dN4dS(etaArray[i]);
 
-                dNdEta[0][i] = dN1dn(ksiArray[i]);
-                dNdEta[1][i] = dN2dn(ksiArray[i]);
-                dNdEta[2][i] = dN3dn(ksiArray[i]);
-                dNdEta[3][i] = dN4dn(ksiArray[i]);
+                dNdEta[i][0]  = dN1dn(ksiArray[i]);
+                dNdEta[i][1]  = dN2dn(ksiArray[i]);
+                dNdEta[i][2]  = dN3dn(ksiArray[i]);
+                dNdEta[i][3]  = dN4dn(ksiArray[i]);
+
 
 
             }

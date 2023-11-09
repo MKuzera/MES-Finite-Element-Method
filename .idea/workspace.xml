@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-base for ElementUniversal">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-base for ElementUniversal v2">
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/BadPointsOfIntegralException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/GlobalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/GlobalData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +86,9 @@
       <workItem from="1697788311561" duration="86000" />
       <workItem from="1698325353749" duration="4734000" />
       <workItem from="1698393123123" duration="73000" />
-      <workItem from="1699170293824" duration="3545000" />
+      <workItem from="1699170293824" duration="3831000" />
+      <workItem from="1699269180188" duration="14000" />
+      <workItem from="1699513369698" duration="13370000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -115,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698332421223</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added:&#10;-base for ElementUniversal v2">
+      <created>1699174158566</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699174158566</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +147,7 @@
     <MESSAGE value="Added: &#10;-Exceptions&#10;-Quick cleaning&#10;-" />
     <MESSAGE value="Added: &#10;-Gauss Interpolation&#10;_Quick Cleaning" />
     <MESSAGE value="Added:&#10;-base for ElementUniversal" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-base for ElementUniversal" />
+    <MESSAGE value="Added:&#10;-base for ElementUniversal v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-base for ElementUniversal v2" />
   </component>
 </project>

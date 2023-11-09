@@ -21,13 +21,14 @@ public class Main {
         // Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
 
 
-        MyFunctionX myFunctionX = x -> 5*x * x + 3 * x + 6;
-        System.out.println(GaussInterpolation.calculateX(3, myFunctionX));
+      //  MyFunctionX myFunctionX = x -> 5*x * x + 3 * x + 6;
+      //  System.out.println(GaussInterpolation.calculateX(3, myFunctionX));
 
-        MyFunctionXY myFunctionXY = (x, y) -> 5*x * x *y*y + 3*x*y +6;
-        System.out.println(GaussInterpolation.calculateXY(3, myFunctionXY));
+      //  MyFunctionXY myFunctionXY = (x, y) -> 5*x * x *y*y + 3*x*y +6;
+      //  System.out.println(GaussInterpolation.calculateXY(3, myFunctionXY));
 
-
+        ElementUniversal elementUniversal = new ElementUniversal(3);
+        elementUniversal.printKsiEta();
 
 
     }

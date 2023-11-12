@@ -1,42 +1,36 @@
 package Data;
 
 import Exceptions.BadPointsOfIntegralException;
-
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import Functions.MatrixCalculator;
+import Gauss.GaussTable;
+
 
 public class ElementUniversal {
     // podczas liczenia pochodnych za ksi i eta wstawiamy punkty calkowania
-    Double[][] dNdKsi;
-    Double [][] dNdEta;
     private Integer pointsOfIntegral;
     private Integer arraySizeBasedOnPointsOfIntegral;
-    private Double[][] matrixH;
-
-    public Double[][] getdNdKsi() {
-        return dNdKsi;
-    }
-
-    public void setdNdKsi(Double[][] dNdKsi) {
-        this.dNdKsi = dNdKsi;
-    }
-
-    public Double[][] getdNdEta() {
-        return dNdEta;
-    }
-
-    public void setdNdEta(Double[][] dNdEta) {
-        this.dNdEta = dNdEta;
-    }
-
     private Double [] ksiArray;
     private Double [] etaArray;
+    private Double[][] dNdKsi;
+    private Double [][] dNdEta;
+    private ArrayList<Double> dets;
+    private ArrayList<Double[][]> HMatrixesList;
+    private Double[][] H;
+    private Double[][] dNdX;
+    private Double[][] dNdY;
+    private Double[] x;
+    private Double[] y;
 
-    // pointsOfIntegral - punkty calkowania
 
-    public ElementUniversal(int pointsOfIntegral){
+    public ElementUniversal(int pointsOfIntegral,Double[] x , Double[] y){
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
 
+                this.x = x;
+                this.y = y;
                 this.pointsOfIntegral = pointsOfIntegral;
                 this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
                 dNdKsi = new Double[4][arraySizeBasedOnPointsOfIntegral];
@@ -45,8 +39,17 @@ public class ElementUniversal {
                 etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
 
                 initKsiEtaCalcPointsArray();
+
                 initdNdKsidNdEta();
-                calcMatrixH();
+
+                dets = new ArrayList<>(arraySizeBasedOnPointsOfIntegral);
+                initdNdXdNdY();
+
+                calcListofMatrixesH();
+                calculateFinalHforElement();
+
+                System.out.println("FINAL H");
+                MatrixCalculator.printMatrix(H);
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
@@ -54,12 +57,10 @@ public class ElementUniversal {
 
     }
 
-    private void calcMatrixH(){
-        Double[] x = new Double[]{0.0 , 0.025 , 0.025,0.0};
-        Double[] y = new Double[]{0.0 , 0.0 , 0.025,0.025};
 
-        Double[][] dNdX = new Double[4][4];
-        Double[][] dNdY = new Double[4][4];
+    private void initdNdXdNdY() {
+        dNdX = new Double[4][4];
+        dNdY = new Double[4][4];
 
         for (int i =0; i< 4;i++) {
 
@@ -69,74 +70,81 @@ public class ElementUniversal {
             Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
 
             Double[][] matrx = new Double[2][2];
+
             matrx[0][0] = dXdKsi;
-            matrx[0][1] = dYdKsi;
-            matrx[1][0] = dXdEta;
+            matrx[0][1] = -dYdKsi;
+            matrx[1][0] = -dXdEta;
             matrx[1][1] = dYdEta;
 
-            System.out.println("XXXXXXXXXXXXXXX");
-            System.out.println(matrx[0][0] + " " + matrx[0][1]);
-            System.out.println(matrx[1][0] + " " + matrx[1][1]);
-
             Double det = matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
-            Double oneByDet = 1.0 / det;
-            System.out.println(oneByDet);
+            dets.add(det);
+            Double oneByDet;
+            oneByDet = 1.0 / det;
 
             matrx[0][0] = matrx[0][0] * oneByDet;
             matrx[0][1] = matrx[0][1] * oneByDet;
             matrx[1][0] = matrx[1][0] * oneByDet;
             matrx[1][1] = matrx[1][1] * oneByDet;
 
-            System.out.println(matrx[0][0] + " " + matrx[0][1]);
-            System.out.println(matrx[1][0] + " " + matrx[1][1]);
-
-
 
             for (int k = 0; k < 4; k++) {
                 dNdX[i][k] = matrx[0][0]*dNdKsi[i][k] + matrx[0][1]*dNdEta[i][k];
                 dNdY[i][k] = matrx[1][0]*dNdKsi[i][k] + matrx[1][1]*dNdEta[i][k];
             }
-
-
         }
+    }
 
+    private void calcListofMatrixesH(){
 
-        System.out.println("Wynik dNdx");
-
-        for (int j = 0; j < 4; j++) {
-            for (int l = 0; l < 4; l++) {
-                System.out.print(dNdX[j][l] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println("dndy");
-        for (int j = 0; j < 4; j++) {
-            for (int l = 0; l < 4; l++) {
-                System.out.print(dNdY[j][l] + " ");
-            }
-            System.out.println();
-        }
-
+        HMatrixesList = new ArrayList<>(4);
+        Double[] tempInputX = new Double[4];
+        Double[] tempInputY = new Double[4];
+        Double[][] matrixH =new Double[4][4];
         for(int i =0; i<4;i++){
-            matrixTimesTransMatrix(dNdX[0]);
-        }
 
+            for (int j = 0; j < 4; j++) {
+                tempInputX[j] = dNdX[i][j];
+                tempInputY[j] = dNdY[i][j];
+            }
+            Double[][] tempDNDX = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputX);
+            Double[][] tempDNDY = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputY);
+
+            matrixH = MatrixCalculator.addMatrices(tempDNDX,tempDNDY);
+            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,30.0); // k(t)
+            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,dets.get(i)); // dV whyy??
+            HMatrixesList.add(matrixH);
+        }
 
     }
 
-    private void matrixTimesTransMatrix(Double[] matrix) {
-        // to do
-        for (Double d:matrix) {
+    private void calculateFinalHforElement(){
+        GaussTable gaussTable = new GaussTable(pointsOfIntegral);
+        int weightX = 0;
+        int weightY = 0;
 
+        H = MatrixCalculator.zeros(arraySizeBasedOnPointsOfIntegral,arraySizeBasedOnPointsOfIntegral);
+        Double[][] temp = MatrixCalculator.zeros(arraySizeBasedOnPointsOfIntegral,arraySizeBasedOnPointsOfIntegral);
+
+        for (int k =0; k<arraySizeBasedOnPointsOfIntegral; k++) {
+
+            temp = MatrixCalculator.multiplyMatrixByValue(HMatrixesList.get(k),
+                    gaussTable.weights.get(weightX)*gaussTable.weights.get(weightY));
+            H = MatrixCalculator.addMatrices(H,temp);
+            weightX+=1;
+            if(weightX == pointsOfIntegral){
+                weightY+=1;
+                weightX=0;
+            }
         }
+
     }
 
 
+    // ξ - ksi
+    // n - eta
     private void initdNdKsidNdEta() {
-
+    // innits the dNdKsi and dNdEta matrix
             for(int i =0;i<arraySizeBasedOnPointsOfIntegral;i++) {
-
-
                 dNdKsi[i][0] = dN1dS(etaArray[i]);
                 dNdKsi[i][1] = dN2dS(etaArray[i]);
                 dNdKsi[i][2] = dN3dS(etaArray[i]);
@@ -146,101 +154,18 @@ public class ElementUniversal {
                 dNdEta[i][1]  = dN2dn(ksiArray[i]);
                 dNdEta[i][2]  = dN3dn(ksiArray[i]);
                 dNdEta[i][3]  = dN4dn(ksiArray[i]);
-
-
-
             }
     }
-    public void printKsiEta(){
 
 
-        System.out.println("KsiArray\n");
-
-        for (int i = 0; i < ksiArray.length; i++) {
-                System.out.print(ksiArray[i] + " ");
-
-        }
-        System.out.println("EtaArray\n");
-
-        for (int i = 0; i < etaArray.length; i++) {
-            System.out.print(etaArray[i] + " ");
-
-        }
-
-
-
-        System.out.println("\nKsi\n");
-
-        for (int i = 0; i < dNdKsi.length; i++) {
-            for (int j = 0; j < dNdKsi[i].length; j++) {
-                System.out.print(dNdKsi[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("\nEta\n");
-        for (int i = 0; i < dNdEta.length; i++) {
-            for (int j = 0; j < dNdEta[i].length; j++) {
-                System.out.print(dNdEta[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-
-
-    }
-
-    public void printKsiEta2(){
-
-
-        System.out.println("KsiArray\n");
-
-        for (int i = 0; i < ksiArray.length; i++) {
-            System.out.print(ksiArray[i] + " ");
-
-        }
-        System.out.println("EtaArray\n");
-
-        for (int i = 0; i < etaArray.length; i++) {
-            System.out.print(etaArray[i] + " ");
-
-        }
-
-
-
-        System.out.println("\nKsi\n");
-
-        for (int i = 0; i < dNdKsi.length; i++) {
-            for (int j = 0; j < dNdKsi[i].length; j++) {
-                System.out.print(dNdKsi[j][i] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("\nEta\n");
-        for (int i = 0; i < dNdEta.length; i++) {
-            for (int j = 0; j < dNdEta[i].length; j++) {
-                System.out.print(dNdEta[j][i] + " ");
-            }
-            System.out.println();
-        }
-
-
-
-    }
-
-    //  ξ - ksi
-    // n - eta
     private void initKsiEtaCalcPointsArray() {
-        // punkty całkowania z GaussTable
+        // innits eta and ksi Arrays used for calc Jakobian
         if(pointsOfIntegral == 2){
-            // SPRAWDZONE - poprawne w wynikami
             Double f = Math.sqrt(1.0/3.0);
             etaArray = new Double[]{-f,-f,f,f};
             ksiArray = new Double[]{-f,f,-f,f};
 
         } else if (pointsOfIntegral == 3) {
-            // SPRAWDZONE - poprawne z wynikami
             Double f = Math.sqrt(3.0/5.0);
             System.out.println(f);
             ksiArray = new Double[]{-f,-f,-f,0.0,0.0,0.0,f,f,f};
@@ -256,7 +181,7 @@ public class ElementUniversal {
     }
 
 
-    // polowa gotowych funkcji:
+    // Functions needed for Jakobian:
 
     // ξ - ksi
 

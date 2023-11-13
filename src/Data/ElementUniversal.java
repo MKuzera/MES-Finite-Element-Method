@@ -9,14 +9,14 @@ import Gauss.GaussTable;
 
 
 public class ElementUniversal {
-    // podczas liczenia pochodnych za ksi i eta wstawiamy punkty calkowania
+
     private Integer pointsOfIntegral;
     private Integer arraySizeBasedOnPointsOfIntegral;
     private Double [] ksiArray;
     private Double [] etaArray;
     private Double[][] dNdKsi;
     private Double [][] dNdEta;
-    private ArrayList<Double> dets;
+    private Double[] dets;
     private ArrayList<Double[][]> HMatrixesList;
     private Double[][] H;
     private Double[][] dNdX;
@@ -25,25 +25,35 @@ public class ElementUniversal {
     private Double[] y;
 
 
+
+
+
     public ElementUniversal(int pointsOfIntegral,Double[] x , Double[] y){
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
-
+            
                 this.x = x;
                 this.y = y;
                 this.pointsOfIntegral = pointsOfIntegral;
-                this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
-                dNdKsi = new Double[4][arraySizeBasedOnPointsOfIntegral];
-                dNdEta = new Double[4][arraySizeBasedOnPointsOfIntegral];
-                ksiArray = new Double[arraySizeBasedOnPointsOfIntegral];
-                etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
+
+                initMatrices();
 
                 initKsiEtaCalcPointsArray();
 
                 initdNdKsidNdEta();
 
-                dets = new ArrayList<>(arraySizeBasedOnPointsOfIntegral);
-                initdNdXdNdY();
+              //  System.out.println("dndksi");
+              //  MatrixCalculator.printMatrix(dNdKsi);
+              //  System.out.println("dndeta");
+              //  MatrixCalculator.printMatrix(dNdEta);
+
+                initJakobian();
+
+                System.out.println("dndX");
+                MatrixCalculator.printMatrix(dNdX);
+                System.out.println("dndy");
+                MatrixCalculator.printMatrix(dNdY);
+
 
                 calcListofMatrixesH();
                 calculateFinalHforElement();
@@ -57,10 +67,19 @@ public class ElementUniversal {
 
     }
 
+    private void initMatrices() {
+        arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
+        dNdKsi = new Double[4][arraySizeBasedOnPointsOfIntegral];
+        dNdEta = new Double[4][arraySizeBasedOnPointsOfIntegral];
+        ksiArray = new Double[arraySizeBasedOnPointsOfIntegral];
+        etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
+        dets = new Double[arraySizeBasedOnPointsOfIntegral];
+    }
 
-    private void initdNdXdNdY() {
+    private void initJakobian() {
         dNdX = new Double[4][4];
         dNdY = new Double[4][4];
+        Double[][] matrx = new Double[2][2];
 
         for (int i =0; i< 4;i++) {
 
@@ -69,49 +88,54 @@ public class ElementUniversal {
             Double dYdKsi = dNdKsi[i][0] * y[0] + dNdKsi[i][1] * y[1] + dNdKsi[i][2] * y[2] + dNdKsi[i][3] * y[3];
             Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
 
-            Double[][] matrx = new Double[2][2];
 
-            matrx[0][0] = dXdKsi;
-            matrx[0][1] = -dYdKsi;
-            matrx[1][0] = -dXdEta;
-            matrx[1][1] = dYdEta;
 
+            matrx[0][0] = dYdKsi;
+            matrx[0][1] = -dYdEta;
+            matrx[1][0] = -dXdKsi;
+            matrx[1][1] = dXdEta;
+            System.out.println("------- PUNKT" + (i+1));
+            System.out.println("matrix");
+            MatrixCalculator.printMatrix(matrx);
             Double det = matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
-            dets.add(det);
+            dets[i] = det;
+            System.out.println("det:" +dets[i]);
+
             Double oneByDet;
-            oneByDet = 1.0 / det;
+            oneByDet = 1.0 / dets[i];
 
-            matrx[0][0] = matrx[0][0] * oneByDet;
-            matrx[0][1] = matrx[0][1] * oneByDet;
-            matrx[1][0] = matrx[1][0] * oneByDet;
-            matrx[1][1] = matrx[1][1] * oneByDet;
+            System.out.println("1/det");
+            System.out.println(oneByDet);
 
+            MatrixCalculator.printMatrix(matrx);
 
             for (int k = 0; k < 4; k++) {
-                dNdX[i][k] = matrx[0][0]*dNdKsi[i][k] + matrx[0][1]*dNdEta[i][k];
-                dNdY[i][k] = matrx[1][0]*dNdKsi[i][k] + matrx[1][1]*dNdEta[i][k];
-            }
+               dNdY[i][k] = (matrx[0][0]*dNdKsi[i][k] + matrx[0][1]*dNdEta[i][k]) * oneByDet;
+               dNdX[i][k] = (matrx[1][0]*dNdKsi[i][k] + matrx[1][1]*dNdEta[i][k]) * oneByDet;
+           }
+
         }
     }
 
     private void calcListofMatrixesH(){
 
-        HMatrixesList = new ArrayList<>(4);
+        HMatrixesList = new ArrayList<>(arraySizeBasedOnPointsOfIntegral);
         Double[] tempInputX = new Double[4];
         Double[] tempInputY = new Double[4];
-        Double[][] matrixH =new Double[4][4];
-        for(int i =0; i<4;i++){
+        Double[][] matrixH;
+        for(int i =0; i<arraySizeBasedOnPointsOfIntegral;i++){
 
             for (int j = 0; j < 4; j++) {
                 tempInputX[j] = dNdX[i][j];
                 tempInputY[j] = dNdY[i][j];
             }
+
             Double[][] tempDNDX = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputX);
             Double[][] tempDNDY = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputY);
 
             matrixH = MatrixCalculator.addMatrices(tempDNDX,tempDNDY);
-            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,30.0); // k(t)
-            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,dets.get(i)); // dV whyy??
+            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,25.0); // k(t)
+            matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,dets[i]);
             HMatrixesList.add(matrixH);
         }
 
@@ -145,15 +169,15 @@ public class ElementUniversal {
     private void initdNdKsidNdEta() {
     // innits the dNdKsi and dNdEta matrix
             for(int i =0;i<arraySizeBasedOnPointsOfIntegral;i++) {
-                dNdKsi[i][0] = dN1dS(etaArray[i]);
-                dNdKsi[i][1] = dN2dS(etaArray[i]);
-                dNdKsi[i][2] = dN3dS(etaArray[i]);
-                dNdKsi[i][3] = dN4dS(etaArray[i]);
+                dNdEta[i][0] = dN1dS(etaArray[i]);
+                dNdEta[i][1] = dN2dS(etaArray[i]);
+                dNdEta[i][2] = dN3dS(etaArray[i]);
+                dNdEta[i][3] = dN4dS(etaArray[i]);
 
-                dNdEta[i][0]  = dN1dn(ksiArray[i]);
-                dNdEta[i][1]  = dN2dn(ksiArray[i]);
-                dNdEta[i][2]  = dN3dn(ksiArray[i]);
-                dNdEta[i][3]  = dN4dn(ksiArray[i]);
+                dNdKsi[i][0]  = dN1dn(ksiArray[i]);
+                dNdKsi[i][1]  = dN2dn(ksiArray[i]);
+                dNdKsi[i][2]  = dN3dn(ksiArray[i]);
+                dNdKsi[i][3]  = dN4dn(ksiArray[i]);
             }
     }
 
@@ -179,9 +203,6 @@ public class ElementUniversal {
         }
 
     }
-
-
-    // Functions needed for Jakobian:
 
     // ξ - ksi
 

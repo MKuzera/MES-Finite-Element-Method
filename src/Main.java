@@ -32,17 +32,19 @@ public class Main {
 
         Double[] x = new Double[]{0.0 , 0.025 , 0.025,0.0};
         Double[] y = new Double[]{0.0 , 0.0 , 0.025,0.025};
+
+
         ArrayList<ElementUniversal> elementUniversals = new ArrayList<>();
         for (Element element: grid.elements) {
             Double[][] XY = grid.createXYListBasedOnElement(element);
             x = XY[0];
             y = XY[1];
-            ElementUniversal elementUniversal = new ElementUniversal(2,x,y);
-            elementUniversals.add(elementUniversal);
-        }
-        // dokoncz
 
-        //elementUniversal.printKsiEta();
+            ElementUniversal   elementUniversal = new ElementUniversal(2,x,y);
+            elementUniversals.add(elementUniversal);
+
+        }
+
 
 
     }

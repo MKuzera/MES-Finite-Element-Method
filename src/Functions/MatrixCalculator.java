@@ -61,5 +61,8 @@ public abstract class MatrixCalculator {
         return temp;
     }
 
+    public static Double detMatrx2x2(Double[][] matrx){
+        return matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
+    }
 
 }

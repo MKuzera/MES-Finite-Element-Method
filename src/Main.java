@@ -39,10 +39,9 @@ public class Main {
             Double[][] XY = grid.createXYListBasedOnElement(element);
             x = XY[0];
             y = XY[1];
-
-            ElementUniversal   elementUniversal = new ElementUniversal(2,x,y);
+            ElementUniversal   elementUniversal = new ElementUniversal(4,x,y);
             elementUniversals.add(elementUniversal);
-
+            break;
         }
 
 

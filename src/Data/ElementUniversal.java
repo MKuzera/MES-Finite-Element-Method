@@ -69,44 +69,50 @@ public class ElementUniversal {
 
     private void initMatrices() {
         arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
-        dNdKsi = new Double[4][arraySizeBasedOnPointsOfIntegral];
-        dNdEta = new Double[4][arraySizeBasedOnPointsOfIntegral];
+        dNdKsi = new Double[arraySizeBasedOnPointsOfIntegral][4];
+        dNdEta = new Double[arraySizeBasedOnPointsOfIntegral][4];
         ksiArray = new Double[arraySizeBasedOnPointsOfIntegral];
         etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
         dets = new Double[arraySizeBasedOnPointsOfIntegral];
     }
 
     private void initJakobian() {
-        dNdX = new Double[4][4];
-        dNdY = new Double[4][4];
+        dNdX = new Double[arraySizeBasedOnPointsOfIntegral][4];
+        dNdY = new Double[arraySizeBasedOnPointsOfIntegral][4];
+        // macierz jakobiego
         Double[][] matrx = new Double[2][2];
 
-        for (int i =0; i< 4;i++) {
+        for (int i =0; i< arraySizeBasedOnPointsOfIntegral;i++) {
+
+            System.out.println("------- PUNKT" + (i+1));
+
 
             Double dXdKsi = dNdKsi[i][0] * x[0] + dNdKsi[i][1] * x[1] + dNdKsi[i][2] * x[2] + dNdKsi[i][3] * x[3];
             Double dXdEta = dNdEta[i][0] * x[0] + dNdEta[i][1] * x[1] + dNdEta[i][2] * x[2] + dNdEta[i][3] * x[3];
             Double dYdKsi = dNdKsi[i][0] * y[0] + dNdKsi[i][1] * y[1] + dNdKsi[i][2] * y[2] + dNdKsi[i][3] * y[3];
             Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
 
+            // init macierz jakobiego
+            matrx[0][0] = dXdKsi;
+            matrx[0][1] = dYdKsi;
+            matrx[1][0] = dXdEta;
+            matrx[1][1] = dYdEta;
 
 
+            dets[i] = MatrixCalculator.detMatrx2x2(matrx);
+            System.out.println("det:" +dets[i]);
+
+            Double oneByDet = 1.0 / dets[i];
+            System.out.println("1/det");
+            System.out.println(oneByDet);
+
+            // inverted macierz jakobiego
             matrx[0][0] = dYdKsi;
             matrx[0][1] = -dYdEta;
             matrx[1][0] = -dXdKsi;
             matrx[1][1] = dXdEta;
-            System.out.println("------- PUNKT" + (i+1));
+
             System.out.println("matrix");
-            MatrixCalculator.printMatrix(matrx);
-            Double det = matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
-            dets[i] = det;
-            System.out.println("det:" +dets[i]);
-
-            Double oneByDet;
-            oneByDet = 1.0 / dets[i];
-
-            System.out.println("1/det");
-            System.out.println(oneByDet);
-
             MatrixCalculator.printMatrix(matrx);
 
             for (int k = 0; k < 4; k++) {
@@ -146,8 +152,8 @@ public class ElementUniversal {
         int weightX = 0;
         int weightY = 0;
 
-        H = MatrixCalculator.zeros(arraySizeBasedOnPointsOfIntegral,arraySizeBasedOnPointsOfIntegral);
-        Double[][] temp = MatrixCalculator.zeros(arraySizeBasedOnPointsOfIntegral,arraySizeBasedOnPointsOfIntegral);
+        H = MatrixCalculator.zeros(4,4);
+        Double[][] temp = MatrixCalculator.zeros(4,4);
 
         for (int k =0; k<arraySizeBasedOnPointsOfIntegral; k++) {
 

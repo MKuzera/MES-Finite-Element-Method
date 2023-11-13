@@ -38,8 +38,18 @@ public abstract class DataImporter {
         addNodes(new ArrayList<>(allLines.subList(11,11 + (GlobalData.nodesNumber))));
         initializeElements();
         addElements(new ArrayList<>(allLines.subList(12 + GlobalData.nodesNumber,12 + GlobalData.nodesNumber + GlobalData.elementsNumber)));
+        initDC(allLines.get(allLines.size() -1));
     }
 
+    private static void  initDC(String line){
+        String[] lineSplited = line.split(",");
+        ArrayList<Integer> temp = new ArrayList<>();
+        for (String s:lineSplited) {
+            s.trim();
+            temp.add(Integer.parseInt(s.trim()));
+        }
+        GlobalData.setDC(temp);
+    }
     private static void addElements(ArrayList<String> strings) {
         for (String string:strings) {
             String[] line = string.split(",");

@@ -15,7 +15,15 @@ public abstract class GlobalData {
     public static int elementsNumber;
     public static ArrayList<Node> nodes;
     public static ArrayList<Element> elements;
+    public static ArrayList<Integer> DC;
 
+    public static ArrayList<Integer> getDC() {
+        return DC;
+    }
+
+    public static void setDC(ArrayList<Integer> DC) {
+        GlobalData.DC = DC;
+    }
 
     public static void setNodes(ArrayList<Node> nodes){
         GlobalData.nodes = nodes;
@@ -76,6 +84,13 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
+    public static String DCToString(){
+        StringBuilder s = new StringBuilder();
+        for (Integer integer: DC) {
+            s.append(integer.toString()).append(" ");
+        }
+        return s.toString();
+    }
 
     public static String getDescription() {
         return  "simulationTime : " + simulationTime +
@@ -87,6 +102,7 @@ public abstract class GlobalData {
                 "\ndensity : " + density +
                 "\nspecificHeat : " + specificHeat +
                 "\nnodesNumber : " + nodesNumber +
-                "\nelementsNumber : " + elementsNumber;
+                "\nelementsNumber : " + elementsNumber+
+                "\nDC : " + DCToString();
     }
 }

@@ -1,9 +1,8 @@
 import Data.*;
-import Functions.MyFunctionX;
-import Functions.MyFunctionXY;
-import Gauss.GaussInterpolation;
+
 import IO.DataImporter;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Main {
@@ -15,7 +14,19 @@ public class Main {
         // "src\IO\Test2_4_4_MixGrid.txt"
         // "src\IO\Test3_31_31_kwadrat.txt"
 
-        DataImporter.importData("src\\IO\\Test1_4_4.txt");
+        /**
+         * Hero is the main entity we'll be using to . . .
+         *
+         * Please see the co class for true identity
+         * @author Mateusz Kuzera
+         *
+         */
+
+        try {
+            DataImporter.importData("src\\IO\\Test1_4_4.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println(GlobalData.getDescription());
         System.out.println("\nnodes: "+ GlobalData.nodesNumber+"\n"+GlobalData.nodesToString());
         System.out.println("\nelements: "+ GlobalData.elementsNumber+"\n"+GlobalData.elementsToString());
@@ -32,14 +43,14 @@ public class Main {
 
         Double[] x = new Double[]{0.0 , 0.025 , 0.025,0.0};
         Double[] y = new Double[]{0.0 , 0.0 , 0.025,0.025};
-
+       ElementUniversal   elementUniversal = new ElementUniversal(4,x,y,30.0);
 
         ArrayList<ElementUniversal> elementUniversals = new ArrayList<>();
         for (Element element: grid.elements) {
             Double[][] XY = grid.createXYListBasedOnElement(element);
             x = XY[0];
             y = XY[1];
-            ElementUniversal   elementUniversal = new ElementUniversal(4,x,y);
+            elementUniversal = new ElementUniversal(4,x,y,GlobalData.conductivity);
             elementUniversals.add(elementUniversal);
             break;
         }

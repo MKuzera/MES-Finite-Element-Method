@@ -1,20 +1,36 @@
 package Data;
 
 import java.util.ArrayList;
-
+/**
+ * <p>This class is a container of all data needed to start a simulation</p>
+ *
+ */
 public abstract class GlobalData {
+    /** *Simulation time */
     public static double simulationTime;
+    /** *Simulation step time */
     public static double simulationStepTime;
+    /** *Conductivity */
     public static double conductivity;
+    /** *Alfa */
     public static double alfa;
+    /** *Tot */
     public static double Tot;
+    /** *initialTemp */
     public static double initialTemp;
+    /** *Density */
     public static double density;
+    /** *Specific Heat */
     public  static double specificHeat;
+    /** *Number of nodes in the grid */
     public static int nodesNumber;
+    /** *Number of elements in the grid */
     public static int elementsNumber;
+    /** *List of nodes in the grid */
     public static ArrayList<Node> nodes;
+    /** *List of elements in the grid */
     public static ArrayList<Element> elements;
+    /** *DC */
     public static ArrayList<Integer> DC;
 
     public static ArrayList<Integer> getDC() {
@@ -70,6 +86,10 @@ public abstract class GlobalData {
     public static void setElementsNumber(int elementsNumber) {
         GlobalData.elementsNumber = elementsNumber;
     }
+    /**
+     * <p>This method creates a string of Nodes</p>
+     * @return all nodes as String
+     */
     public static String nodesToString(){
        StringBuilder s = new StringBuilder();
         for (Node node: nodes) {
@@ -77,6 +97,10 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
+    /**
+     * <p>This method creates a string of Elements</p>
+     * @return all Elements as String
+     */
     public static String elementsToString(){
         StringBuilder s = new StringBuilder();
         for (Element element: elements) {
@@ -84,6 +108,10 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
+    /**
+     * <p>This method creates a string of DC points</p>
+     * @return all points as String
+     */
     public static String DCToString(){
         StringBuilder s = new StringBuilder();
         for (Integer integer: DC) {
@@ -91,7 +119,10 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
-
+    /**
+     * <p>This method creates a string of all data that class contains</p>
+     * @return string with summary of what class contains
+     */
     public static String getDescription() {
         return  "simulationTime : " + simulationTime +
                 "\nsimulationStepTime : " + simulationStepTime +

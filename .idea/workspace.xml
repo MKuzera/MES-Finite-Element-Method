@@ -4,13 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-ElementUniversal.java - calculates properly matrix H for 4v4 grid">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-implemented javadoc into code">
+      <change afterPath="$PROJECT_DIR$/Zeszyt1.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/girds.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Data/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Exceptions/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Functions/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Gauss/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO/package-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/GlobalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/GlobalData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IO/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/DataImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/BadDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/BadDataException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/BadPointsOfIntegralException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/BadPointsOfIntegralException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Functions/MyFunctionX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MyFunctionX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Functions/MyFunctionXY.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MyFunctionXY.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussInterpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussInterpolation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +202,7 @@
     <MESSAGE value="Added:&#10;-started adding solution for H matrix" />
     <MESSAGE value="Added:&#10;-added matrixH calc" />
     <MESSAGE value="Added:&#10;-ElementUniversal.java - calculates properly matrix H for 4v4 grid" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-ElementUniversal.java - calculates properly matrix H for 4v4 grid" />
+    <MESSAGE value="Added:&#10;-implemented javadoc into code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-implemented javadoc into code" />
   </component>
 </project>

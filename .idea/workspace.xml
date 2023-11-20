@@ -4,25 +4,102 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-implemented javadoc into code">
-      <change afterPath="$PROJECT_DIR$/Zeszyt1.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/girds.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Data/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Exceptions/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Functions/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Gauss/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/IO/package-info.java" afterDir="false" />
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added:&#10;-doc folder">
+      <change afterPath="$PROJECT_DIR$/doc/Data/Element.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/ElementUniversal.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/GlobalData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/Grid.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/Node.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Data/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Exceptions/BadDataException.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Exceptions/BadPointsOfIntegralException.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Exceptions/FileNotFoundException.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Exceptions/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Exceptions/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Functions/MatrixCalculator.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Functions/MyFunctionX.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Functions/MyFunctionXY.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Functions/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Functions/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Gauss/GaussInterpolation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Gauss/GaussTable.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Gauss/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Gauss/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/IO/DataImporter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/IO/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/IO/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/Main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/allclasses.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/constant-values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/deprecated-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-16.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-17.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/external/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-icons_222222_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-icons_454545_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-icons_888888_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-3.5.1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.structure.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jquery-ui.structure.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip-utils/dist/jszip-utils-ie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip-utils/dist/jszip-utils-ie.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip-utils/dist/jszip-utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip-utils/dist/jszip-utils.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip/dist/jszip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/jquery/jszip/dist/jszip.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/member-search-index.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/package-search-index.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/serialized-form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/type-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/BadDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/BadDataException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/BadPointsOfIntegralException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/BadPointsOfIntegralException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/FileNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MyFunctionX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MyFunctionX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MyFunctionXY.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MyFunctionXY.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussInterpolation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussInterpolation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +188,13 @@
       <workItem from="1699790107187" duration="29000" />
       <workItem from="1699792702498" duration="6096000" />
       <workItem from="1699889598923" duration="3903000" />
+      <workItem from="1699961655816" duration="897000" />
+      <workItem from="1700120990896" duration="672000" />
+      <workItem from="1700131823728" duration="891000" />
+      <workItem from="1700144270540" duration="5036000" />
+      <workItem from="1700150675810" duration="29000" />
+      <workItem from="1700200952188" duration="13000" />
+      <workItem from="1700497487694" duration="3284000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -175,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699890723328</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added:&#10;-implemented javadoc into code">
+      <created>1699961708654</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699961708654</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +294,7 @@
     <MESSAGE value="Added:&#10;-added matrixH calc" />
     <MESSAGE value="Added:&#10;-ElementUniversal.java - calculates properly matrix H for 4v4 grid" />
     <MESSAGE value="Added:&#10;-implemented javadoc into code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-implemented javadoc into code" />
+    <MESSAGE value="Added:&#10;-doc folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added:&#10;-doc folder" />
   </component>
 </project>

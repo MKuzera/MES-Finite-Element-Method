@@ -133,6 +133,10 @@ public class ElementUniversal {
             dNdKsi[i][2]  = dN3dn(ksiArray[i]);
             dNdKsi[i][3]  = dN4dn(ksiArray[i]);
         }
+      //  System.out.println("dNdEta");
+     //   MatrixCalculator.printMatrix(dNdEta);
+     //   System.out.println("dNdKsi");
+    //    MatrixCalculator.printMatrix(dNdKsi);
     }
 
     private void initJakobian() {
@@ -140,6 +144,11 @@ public class ElementUniversal {
         dNdY = new Double[arraySizeBasedOnPointsOfIntegral][4];
         // macierz jakobiego
         Double[][] matrx = new Double[2][2];
+
+        System.out.println("dNdETA");
+        MatrixCalculator.printMatrix(dNdEta);
+        System.out.println("dNdKSI");
+        MatrixCalculator.printMatrix(dNdKsi);
 
         for (int i =0; i< arraySizeBasedOnPointsOfIntegral;i++) {
 
@@ -149,6 +158,22 @@ public class ElementUniversal {
             Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
 
 
+
+            Double[][] matrix2 = new Double[2][2];
+
+
+            matrix2[0][0] = dXdEta;
+            matrix2[0][1] = dYdEta;
+            matrix2[1][0] = dXdKsi;
+            matrix2[1][1] = dYdKsi;
+
+            // #1 zmiana
+//            matrix2[0][0] = dXdEta; poprawe
+//            matrix2[0][1] = dXdKsi;
+//            matrix2[1][0] = dYdEta;
+//            matrix2[1][1] = dYdKsi;
+
+
             matrx[0][0] = dYdKsi;
             matrx[0][1] = -dYdEta;
             matrx[1][0] = -dXdKsi;
@@ -156,14 +181,22 @@ public class ElementUniversal {
 
             dets[i] = MatrixCalculator.detMatrx2x2(matrx);
 
+
             matrx = MatrixCalculator.multiplyMatrixByValue(matrx,1.0/dets[i]);
-
+            // i - punktycalk^2 czyli 4 9 16
+            // k - od 0 do 4
             for (int k = 0; k < 4; k++) {
-               dNdY[i][k] = (matrx[0][0]*dNdKsi[i][k] + matrx[0][1]*dNdEta[i][k]) ;
-               dNdX[i][k] = (matrx[1][0]*dNdKsi[i][k] + matrx[1][1]*dNdEta[i][k]) ;
+                dNdX[i][k] = (matrx[1][1]*dNdKsi[i][k] + matrx[1][0]*dNdEta[i][k]) ;
+                dNdY[i][k] = (matrx[0][1]*dNdKsi[i][k] + matrx[0][0]*dNdEta[i][k]) ;
            }
-        }
 
+
+        }
+        System.out.println("DNDX");
+        MatrixCalculator.printMatrix(dNdX);
+        System.out.println("DNDY");
+        MatrixCalculator.printMatrix(dNdY);
+        System.out.println();
     }
 
     private void calcListofMatrixesH(){
@@ -186,6 +219,8 @@ public class ElementUniversal {
 
             matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,kt*dets[i]);
 
+            System.out.println("H matrix nr" + i);
+            MatrixCalculator.printMatrix(matrixH);
             HMatrixesList.add(matrixH);
         }
 

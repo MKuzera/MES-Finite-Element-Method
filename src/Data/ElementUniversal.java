@@ -35,7 +35,11 @@ public class ElementUniversal {
     private Double[][] dNdY;
     private Double[] x;
     private Double[] y;
+
     private Double kt;
+    private Double[][] Hbc;
+
+    //private Surface[] = new Surface; 4
 
     /**
      *
@@ -49,17 +53,19 @@ public class ElementUniversal {
      * <p>
      * Constructor creates a new Element Universal and Calculates matrix H for given parameters
      * @param pointsOfIntegral number of points of integral
-     * @param x Array with X values
-     * @param y Array with Y values
      * @param kt parameter
+     * @param element element that will be calculated
+     * @param grid the global grid used in program
      * </p>
      */
-    public ElementUniversal(int pointsOfIntegral,Double[] x , Double[] y,Double kt){
+    public ElementUniversal(int pointsOfIntegral,Element element,Double kt, Grid grid){
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
+                Double[][] XY = element.createXYListBasedOnElement(element, grid);
+
                 this.kt =kt;
-                this.x = x;
-                this.y = y;
+                this.x = XY[0];
+                this.y =  XY[1];
                 this.pointsOfIntegral = pointsOfIntegral;
                 this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
 
@@ -97,6 +103,7 @@ public class ElementUniversal {
         ksiArray = new Double[arraySizeBasedOnPointsOfIntegral];
         etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
         dets = new Double[arraySizeBasedOnPointsOfIntegral];
+        Hbc = new Double[4][4];
     }
     private void initKsiEtaCalcPointsArray() {
         if(pointsOfIntegral == 2){
@@ -133,24 +140,23 @@ public class ElementUniversal {
             dNdKsi[i][2]  = dN3dn(ksiArray[i]);
             dNdKsi[i][3]  = dN4dn(ksiArray[i]);
         }
-      //  System.out.println("dNdEta");
-     //   MatrixCalculator.printMatrix(dNdEta);
-     //   System.out.println("dNdKsi");
-    //    MatrixCalculator.printMatrix(dNdKsi);
     }
 
     private void initJakobian() {
+        // utowrzenie macierzy dNdX dNdY o wielkosci liczbapunktcalkowania^2 i 4 (4 jest zawsze stałe)
         dNdX = new Double[arraySizeBasedOnPointsOfIntegral][4];
         dNdY = new Double[arraySizeBasedOnPointsOfIntegral][4];
         // macierz jakobiego
         Double[][] matrx = new Double[2][2];
 
-        System.out.println("dNdETA");
-        MatrixCalculator.printMatrix(dNdEta);
-        System.out.println("dNdKSI");
-        MatrixCalculator.printMatrix(dNdKsi);
+       // System.out.println("dNdETA");
+     //   MatrixCalculator.printMatrix(dNdEta);
+     //   System.out.println("dNdKSI");
+      //  MatrixCalculator.printMatrix(dNdKsi);
 
         for (int i =0; i< arraySizeBasedOnPointsOfIntegral;i++) {
+
+            // wyznaczenie danych do macierzy jakobiego
 
             Double dXdKsi = dNdKsi[i][0] * x[0] + dNdKsi[i][1] * x[1] + dNdKsi[i][2] * x[2] + dNdKsi[i][3] * x[3];
             Double dXdEta = dNdEta[i][0] * x[0] + dNdEta[i][1] * x[1] + dNdEta[i][2] * x[2] + dNdEta[i][3] * x[3];
@@ -161,30 +167,25 @@ public class ElementUniversal {
 
             Double[][] matrix2 = new Double[2][2];
 
-
+            // macierz jakobiego
             matrix2[0][0] = dXdEta;
             matrix2[0][1] = dYdEta;
             matrix2[1][0] = dXdKsi;
             matrix2[1][1] = dYdKsi;
 
-            // #1 zmiana
-//            matrix2[0][0] = dXdEta; poprawe
-//            matrix2[0][1] = dXdKsi;
-//            matrix2[1][0] = dYdEta;
-//            matrix2[1][1] = dYdKsi;
-
-
+            // odwrocona macierz jakobiego
             matrx[0][0] = dYdKsi;
             matrx[0][1] = -dYdEta;
             matrx[1][0] = -dXdKsi;
             matrx[1][1] = dXdEta;
 
+            // dodaje wyznacznik do tabeli wyznacznikow
             dets[i] = MatrixCalculator.detMatrx2x2(matrx);
 
-
+            // mnozy kazdy element odwroconej macierzy jakobiego przez 1/det
             matrx = MatrixCalculator.multiplyMatrixByValue(matrx,1.0/dets[i]);
-            // i - punktycalk^2 czyli 4 9 16
-            // k - od 0 do 4
+
+            // oblicza dNdX dNdY dla danego punktu calkowania
             for (int k = 0; k < 4; k++) {
                 dNdX[i][k] = (matrx[1][1]*dNdKsi[i][k] + matrx[1][0]*dNdEta[i][k]) ;
                 dNdY[i][k] = (matrx[0][1]*dNdKsi[i][k] + matrx[0][0]*dNdEta[i][k]) ;
@@ -192,25 +193,28 @@ public class ElementUniversal {
 
 
         }
-        System.out.println("DNDX");
-        MatrixCalculator.printMatrix(dNdX);
-        System.out.println("DNDY");
-        MatrixCalculator.printMatrix(dNdY);
-        System.out.println();
+//        System.out.println("DNDX");
+//        MatrixCalculator.printMatrix(dNdX);
+//        System.out.println("DNDY");
+//        MatrixCalculator.printMatrix(dNdY);
+//        System.out.println();
     }
 
     private void calcListofMatrixesH(){
 
+        // tworzy liste macierzy H (1 macierz H dla 1 punktu)
         HMatrixesList = new ArrayList<>(arraySizeBasedOnPointsOfIntegral);
         Double[] tempInputX = new Double[4];
         Double[] tempInputY = new Double[4];
         Double[][] matrixH;
+
         for(int i =0; i<arraySizeBasedOnPointsOfIntegral;i++){
 
             for (int j = 0; j < 4; j++) {
                 tempInputX[j] = dNdX[i][j];
                 tempInputY[j] = dNdY[i][j];
             }
+
 
             Double[][] tempDNDX = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputX);
             Double[][] tempDNDY = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputY);
@@ -219,8 +223,8 @@ public class ElementUniversal {
 
             matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,kt*dets[i]);
 
-            System.out.println("H matrix nr" + i);
-            MatrixCalculator.printMatrix(matrixH);
+//            System.out.println("H matrix nr" + i);
+//            MatrixCalculator.printMatrix(matrixH);
             HMatrixesList.add(matrixH);
         }
 
@@ -247,6 +251,10 @@ public class ElementUniversal {
                 weightX=0;
             }
         }
+
+    }
+
+    private void calculateHbcMatrix(){
 
     }
 

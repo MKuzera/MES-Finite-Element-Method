@@ -57,6 +57,7 @@ public abstract class DataImporter {
         initializeElements();
         addElements(new ArrayList<>(allLines.subList(12 + GlobalData.nodesNumber,12 + GlobalData.nodesNumber + GlobalData.elementsNumber)));
         initDC(allLines.get(allLines.size() -1));
+        setDCtoNodes();
     }
     /**
      * <p>
@@ -188,6 +189,15 @@ public abstract class DataImporter {
             temp.add(Integer.parseInt(s.trim()));
         }
         GlobalData.setDC(temp);
+    }
+
+    private static void setDCtoNodes(){
+        for (Node node: GlobalData.nodes ) {
+            if(GlobalData.DC.contains(node.ID)){
+                node.DC = 1;
+            }
+        }
+
     }
 
 

@@ -1,6 +1,8 @@
 
 package Functions;
 
+import java.nio.DoubleBuffer;
+
 /**
  * <p>MatrixCalculator is a simple calculator used to calculate <b>two-dimensional matrices</b> in an application.
  * </p>
@@ -82,7 +84,20 @@ public abstract class MatrixCalculator {
             System.out.println();
         }
     }
-    /**
+    public static String toStringMatrix(Double[][] matrix){
+        StringBuilder s = new StringBuilder();
+        for (Double[] row : matrix) {
+            for (Double element : row) {
+                s.append(element + " ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
+    }
+
+
+
+                                      /**
      * <p> Method that creates and returns two-dimensional matrix filled with (Double) 0.0 values
      * </p>
      *

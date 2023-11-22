@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class Element {
     ArrayList<Integer> ID = new ArrayList<>(4);
     Double[][] matrixH;
+
+    Double[] x; // needed for single element calc
+    Double[] y; // needed for single element calc
+
     /**
      * <p>The Constructor creates a new Element with assigned IDs values of nodes that Element contains
      * </p>
@@ -24,6 +28,17 @@ public class Element {
         ID.add(x2);
         ID.add(x3);
         ID.add(x4);
+    }
+
+    public Element(Double[] x , Double[] y){
+        this.x = x;
+        this.y =y;
+    }
+    public Double[][] createXYbasenOnPointXY(){
+        Double[][] XY = new Double[2][x.length];
+        XY[0] = x;
+        XY[1] = y;
+        return XY;
     }
     public String toString(){
         return ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3);

@@ -1,6 +1,7 @@
 package Gauss;
 import Exceptions.BadDataException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * <p>GaussTable is a class that provides ArrayLists of weights (wi) and points (xi) based on number of points provided
@@ -11,6 +12,10 @@ public class GaussTable {
 
     public ArrayList<Double> pointsNum = new ArrayList<Double>();
     public ArrayList<Double> weights= new ArrayList<Double>();
+
+    public ArrayList<Double> reversePointsNum = new ArrayList<Double>();
+    public ArrayList<Double> reverseWeights= new ArrayList<Double>();
+
     private int numberOfPointsVar;
 
     /**
@@ -60,6 +65,20 @@ public class GaussTable {
         }
 
     }
+
+    public void initReversedWeightsAndPoints(){
+
+        Collections.reverse(weights);
+        Collections.reverse(pointsNum);
+
+        reverseWeights = new ArrayList<>(weights);
+        reversePointsNum = new ArrayList<>(pointsNum);
+
+        Collections.reverse(weights);
+        Collections.reverse(pointsNum);
+
+    }
+
 
     public String toString(){
         StringBuilder s = new StringBuilder();

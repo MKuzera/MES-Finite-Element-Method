@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Fixed H Matrix calculations for mixGrid">
-      <change afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Works HBC for one element. Fix L/2, add grids to it.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Grid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IO/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/DataImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +108,9 @@
       <workItem from="1700497487694" duration="4026000" />
       <workItem from="1700562921300" duration="33000" />
       <workItem from="1700578982663" duration="4126000" />
-      <workItem from="1700584660288" duration="353000" />
+      <workItem from="1700584660288" duration="934000" />
+      <workItem from="1700637773714" duration="5925000" />
+      <workItem from="1700659532920" duration="3723000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -190,7 +189,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700501158730</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Prep work for Surface and Hbc">
+      <created>1700585709225</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1700585709225</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +226,8 @@
     <MESSAGE value="Added:&#10;-implemented javadoc into code" />
     <MESSAGE value="Added:&#10;-doc folder" />
     <MESSAGE value="Fixed H Matrix calculations for mixGrid" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed H Matrix calculations for mixGrid" />
+    <MESSAGE value="Prep work for Surface and Hbc" />
+    <MESSAGE value="Works HBC for one element. Fix L/2, add grids to it." />
+    <option name="LAST_COMMIT_MESSAGE" value="Works HBC for one element. Fix L/2, add grids to it." />
   </component>
 </project>

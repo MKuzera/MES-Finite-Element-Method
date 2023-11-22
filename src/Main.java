@@ -26,6 +26,8 @@ public class Main {
 
         Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
 
+       // Element element = new Element()
+
 
 
       //  MyFunctionX myFunctionX = x -> 5*x * x + 3 * x + 6;
@@ -38,14 +40,16 @@ public class Main {
      //   Double[] y = new Double[]{0.0 , 0.0 , 0.025,0.025};
      //   ElementUniversal   elementUniversal = new ElementUniversal(2,x,y,30.0);
 
-        for (Element element: grid.elements) {
-            System.out.println();
-            ElementUniversal elementUniversal = new ElementUniversal(4,element,GlobalData.conductivity,grid);
-            element.setMatrixH(elementUniversal.getH());
-            System.out.println(element.toStringWithMatrixH());
-            break;
-        }
-
+//        for (Element element: grid.elements) {
+//            System.out.println();
+//            ElementUniversal elementUniversal = new ElementUniversal(4,element,GlobalData.conductivity,grid);
+//            element.setMatrixH(elementUniversal.getH());
+//            System.out.println(element.toStringWithMatrixH());
+//            break;
+//        }
+//
+        Element element = new Element(new Double[]{0.0,0.025,0.025,0.0}, new Double[]{0.0,0.0,0.025,0.025});
+        ElementUniversal elementUniversal = new ElementUniversal(2,element,GlobalData.conductivity,grid,25.0);
 
 
 

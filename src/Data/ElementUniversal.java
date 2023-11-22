@@ -24,6 +24,7 @@ public class ElementUniversal {
 
     private Integer pointsOfIntegral;
     private Integer arraySizeBasedOnPointsOfIntegral;
+    private Element element;
     private Double [] ksiArray;
     private Double [] etaArray;
     private Double[][] dNdKsi;
@@ -37,7 +38,10 @@ public class ElementUniversal {
     private Double[] y;
 
     private Double kt;
+    private Double alfa;
     private Double[][] Hbc;
+
+
 
     //private Surface[] = new Surface; 4
 
@@ -58,12 +62,15 @@ public class ElementUniversal {
      * @param grid the global grid used in program
      * </p>
      */
-    public ElementUniversal(int pointsOfIntegral,Element element,Double kt, Grid grid){
+    public ElementUniversal(int pointsOfIntegral,Element element,Double kt, Grid grid,Double alfa){
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
-                Double[][] XY = element.createXYListBasedOnElement(element, grid);
 
+             //   Double[][] XY = element.createXYListBasedOnElement(element, grid);
+                Double[][] XY = element.createXYbasenOnPointXY();
+                this.element = element;
                 this.kt =kt;
+                this.alfa= alfa;
                 this.x = XY[0];
                 this.y =  XY[1];
                 this.pointsOfIntegral = pointsOfIntegral;
@@ -90,11 +97,17 @@ public class ElementUniversal {
 
                 // prints the final matrix H
                 MatrixCalculator.printMatrix(H);
+
+                calcListofHBC();
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
         }
 
+    }
+
+    private void calcListofHBC() {
+        Surface surface = new Surface(pointsOfIntegral,element,alfa);
     }
 
     public void initMatrices() {

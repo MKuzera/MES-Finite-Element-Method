@@ -36,7 +36,7 @@ public class ElementUniversal {
     private Double[][] dNdY;
     private Double[] x;
     private Double[] y;
-
+    private Grid grid;
     private Double kt;
     private Double alfa;
     private Double[][] Hbc;
@@ -66,9 +66,12 @@ public class ElementUniversal {
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
 
-             //   Double[][] XY = element.createXYListBasedOnElement(element, grid);
-                Double[][] XY = element.createXYbasenOnPointXY();
+                Double[][] XY = element.createXYListBasedOnElement(grid);
+                this.grid = grid;
+                //Double[][] XY = element.createXYbasenOnPointXY();
+
                 this.element = element;
+
                 this.kt =kt;
                 this.alfa= alfa;
                 this.x = XY[0];
@@ -96,7 +99,7 @@ public class ElementUniversal {
                 calculateFinalHforElement();
 
                 // prints the final matrix H
-                MatrixCalculator.printMatrix(H);
+           //     MatrixCalculator.printMatrix(H);
 
                 calcListofHBC();
         }
@@ -107,7 +110,7 @@ public class ElementUniversal {
     }
 
     private void calcListofHBC() {
-        Surface surface = new Surface(pointsOfIntegral,element,alfa);
+        Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
     }
 
     public void initMatrices() {

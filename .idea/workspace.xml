@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gauss/GaussTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gauss/GaussTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +109,10 @@
       <workItem from="1700578982663" duration="4126000" />
       <workItem from="1700584660288" duration="934000" />
       <workItem from="1700637773714" duration="5925000" />
-      <workItem from="1700659532920" duration="3723000" />
+      <workItem from="1700659532920" duration="3850000" />
+      <workItem from="1700673901318" duration="1198000" />
+      <workItem from="1700721853974" duration="32000" />
+      <workItem from="1700734913414" duration="2263000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -196,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700585709225</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Works HBC for one element. Fix L/2, add grids to it.">
+      <created>1700663407876</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1700663407876</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

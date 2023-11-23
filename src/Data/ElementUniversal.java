@@ -270,11 +270,6 @@ public class ElementUniversal {
 
     }
 
-    private void calculateHbcMatrix(){
-
-    }
-
-
 
 
     private double dN1dS(Double eta){
@@ -297,8 +292,7 @@ public class ElementUniversal {
     private double dN2dn(Double ksi){
         return -0.25*(1.0+ksi);
     }
-    private double dN3dn(Double ksi){
-        return 0.25*(1.0+ksi);}
+    private double dN3dn(Double ksi){ return 0.25*(1.0+ksi);}
     private double dN4dn(Double ksi){
         return 0.25*(1.0-ksi);
     }

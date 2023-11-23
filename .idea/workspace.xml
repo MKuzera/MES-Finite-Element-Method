@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Works HBC for one element. Fix L/2, add grids to it.">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Calcs HBC for each Element">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +112,10 @@
       <workItem from="1700659532920" duration="3850000" />
       <workItem from="1700673901318" duration="1198000" />
       <workItem from="1700721853974" duration="32000" />
-      <workItem from="1700734913414" duration="2263000" />
+      <workItem from="1700734913414" duration="2640000" />
+      <workItem from="1700740585578" duration="153000" />
+      <workItem from="1700741873837" duration="3210000" />
+      <workItem from="1700749833908" duration="4208000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -205,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700663407876</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Calcs HBC for each Element">
+      <created>1700737484886</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1700737484886</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,6 +247,7 @@
     <MESSAGE value="Fixed H Matrix calculations for mixGrid" />
     <MESSAGE value="Prep work for Surface and Hbc" />
     <MESSAGE value="Works HBC for one element. Fix L/2, add grids to it." />
-    <option name="LAST_COMMIT_MESSAGE" value="Works HBC for one element. Fix L/2, add grids to it." />
+    <MESSAGE value="Calcs HBC for each Element" />
+    <option name="LAST_COMMIT_MESSAGE" value="Calcs HBC for each Element" />
   </component>
 </project>

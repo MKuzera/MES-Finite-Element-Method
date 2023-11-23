@@ -16,7 +16,7 @@ public class Main {
 
 
         try {
-            DataImporter.importData("src\\IO\\Test1_4_4.txt");
+            DataImporter.importData("src\\IO\\Test2_4_4_MixGrid.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

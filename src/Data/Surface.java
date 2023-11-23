@@ -12,18 +12,18 @@ public class Surface {
     GaussTable gaussTable;
     Element element;
     ArrayList<Double[][]> listOfWalls;
-    ArrayList<Double[][]> listOfHBC;
     ArrayList<Double[][]> listOfHBC2x2;
     ArrayList<Double> listOfDetJ;
     Grid grid;
     Double[][] finalHBC;
+    Double[] finalP;
 
     int calcPoints;
     public Surface(int calcPoints,Element element,Double alfa,Grid grid){
         this.alfa = alfa;
         this.grid =grid;
         listOfWalls = new ArrayList<>(4);
-        listOfHBC = new ArrayList<>(4);
+
         listOfDetJ = new ArrayList<>(4);
         listOfHBC2x2 = new ArrayList<>(4);
         this.calcPoints =calcPoints;
@@ -33,11 +33,17 @@ public class Surface {
         gaussTable.initReversedWeightsAndPoints();
 
         finalHBC = MatrixCalculator.zeros(4,4);
+        finalP = MatrixCalculator.VECTORzeros(4);
         initValuesInCalcPoints();
         initDetJ();
         calcListOfHBC();
-        cut4x4to2x2HBCs();
-        calcFinalHBC();
+        //cut4x4to2x2HBCs();
+        System.out.println("HBC");
+        MatrixCalculator.printMatrix(finalHBC);
+        System.out.println("P");
+        MatrixCalculator.VECTORprint(finalP);
+        System.out.println();
+
 
 
     }
@@ -121,34 +127,77 @@ public class Surface {
     private void calcListOfHBC() {
 
         for (int nrSurface = 0; nrSurface < 4; nrSurface++) {
-            ArrayList<Double[][]> lisofTemps = new ArrayList<>(calcPoints);
-            Double[][] temp;
-            for (int i = 0; i < calcPoints; i++) {
-                Double[][] tempSurface = listOfWalls.get(nrSurface);
-//                System.out.println("Matrix");
-//                for(int j =0; j<4;j++){
-//                    System.out.print(tempSurface[i][j] + " ");
-//                }
-            //    System.out.println();
-                temp = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempSurface[i]);
-           //     System.out.println("transpose");
-          //     MatrixCalculator.printMatrix(temp);
-           //     System.out.println("times weight "+ gaussTable.weights.get(i));
-                temp = MatrixCalculator.multiplyMatrixByValue(temp,gaussTable.weights.get(i) * alfa);
-          //      System.out.println("After * weight * alfa ");
-          //      MatrixCalculator.printMatrix(temp);
 
 
-                lisofTemps.add(temp);
+            int node1 = element.ID.get(nrSurface);
+            int tempnumber = nrSurface + 1;
+            if (tempnumber > 3) tempnumber = 0;
+            int node2 = element.ID.get(tempnumber);
+
+            if (GlobalData.DC.contains(node1) && GlobalData.DC.contains(node2)) {
+                ArrayList<Double[][]> lisofTempsHBC = new ArrayList<>(calcPoints);
+                ArrayList<Double[]> lisofTempsP = new ArrayList<>(calcPoints);
+
+                for (int i = 0; i < calcPoints; i++) {
+                    Double[][] temp =  listOfWalls.get(nrSurface);
+                    temp = MatrixCalculator.multiplyVectorByItsOwnTranspose(temp[i]);
+                    temp = MatrixCalculator.multiplyMatrixByValue(temp, gaussTable.weights.get(i) * alfa);
+                    lisofTempsHBC.add(temp);
+
+                    Double[] tempP;
+                    temp = listOfWalls.get(nrSurface);
+                    tempP = MatrixCalculator.VECTORmultiply(temp[i],gaussTable.weights.get(i) * GlobalData.Tot * alfa);
+                    lisofTempsP.add(tempP);
+                }
+
+                Double[][] temp = MatrixCalculator.zeros(4, 4);
+                Double[] tempP = MatrixCalculator.VECTORzeros(4);
+
+                for (int i = 0; i < calcPoints; i++) {
+                    temp = MatrixCalculator.addMatrices(temp, lisofTempsHBC.get(i));
+                    tempP = MatrixCalculator.VECTORadd(tempP,lisofTempsP.get(i));
+                }
+
+
+                temp = MatrixCalculator.multiplyMatrixByValue(temp, listOfDetJ.get(nrSurface));
+                tempP = MatrixCalculator.VECTORmultiply(tempP,listOfDetJ.get(nrSurface));
+
+                finalHBC = MatrixCalculator.addMatrices(finalHBC, temp);
+                finalP = MatrixCalculator.VECTORadd(finalP,tempP);
+
             }
 
-            temp = MatrixCalculator.zeros(4,4);
-            for(int i = 0; i < calcPoints; i++){
-                temp = MatrixCalculator.addMatrices(temp,lisofTemps.get(i));
-            }
-            temp = MatrixCalculator.multiplyMatrixByValue(temp,listOfDetJ.get(nrSurface) );//listOfDetJ.get(nrSurface)
-            listOfHBC.add(temp);
-          }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// sprawdza ktore sciany sa zewnetrzne i zwraca HBC[][] ktore jest suma HBC zewnetrzych scian
+
+
+
+
+
+
      //   System.out.println("HBC");
      //   System.out.println("dolna prawa gorna lewa");
        // for (Double[][] x: listOfHBC) {
@@ -156,46 +205,31 @@ public class Surface {
       //      System.out.println();
       //   }
 
-        }
-
-// sprawdza ktore sciany sa zewnetrzne i zwraca HBC[][] ktore jest suma HBC zewnetrzych scian
-    private void calcFinalHBC(){
-        //dolna prawa gorna lewa
-        for(int nrSurface = 0;nrSurface<4;nrSurface++){
-            int node1 = element.ID.get(nrSurface);
-            int temp = nrSurface+1;
-            if(temp>3)temp=0;
-            int node2 = element.ID.get(temp);
-            if(GlobalData.DC.contains(node1) &&GlobalData.DC.contains(node2)){
-                finalHBC=MatrixCalculator.addMatrices(finalHBC,listOfHBC.get(nrSurface));
-            }
-        }
-        System.out.println("Final HBC");
-        MatrixCalculator.printMatrix(finalHBC);
 
 
-    }
 
-    private void cut4x4to2x2HBCs() {
-        Double[][] temp = new Double[2][2];
-        int curX = 0,curY = 0;
-        for(Double[][] hbc: listOfHBC){
-            curX = 0;
-            curY = 0;
-            for(int i =0;i<4;i++){
-                for (int j =0;j<4;j++){
-                    if(hbc[i][j] != 0.0){
-                        temp[curX][curY] = hbc[i][j];
-                        curX+=1;
-                        if(curX >1){
-                            curX =0;
-                            curY+=1;
-                        }
-                    }
-                }
-            }
-            listOfHBC2x2.add(temp);
-        }
+
+
+//    private void cut4x4to2x2HBCs() {
+//        Double[][] temp = new Double[2][2];
+//        int curX = 0,curY = 0;
+//        for(Double[][] hbc: listOfHBC){
+//            curX = 0;
+//            curY = 0;
+//            for(int i =0;i<4;i++){
+//                for (int j =0;j<4;j++){
+//                    if(hbc[i][j] != 0.0){
+//                        temp[curX][curY] = hbc[i][j];
+//                        curX+=1;
+//                        if(curX >1){
+//                            curX =0;
+//                            curY+=1;
+//                        }
+//                    }
+//                }
+//            }
+//            listOfHBC2x2.add(temp);
+//        }
 
 //        System.out.println("2x2");
 //        for (Double[][] x: listOfHBC2x2) {
@@ -208,7 +242,7 @@ public class Surface {
 //            }
 //            System.out.println();
 //        }
-    }
+
 
     public static double calcDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) / 2;

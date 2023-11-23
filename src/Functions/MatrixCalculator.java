@@ -114,6 +114,9 @@ public abstract class MatrixCalculator {
         }
         return temp;
     }
+
+
+
     /**
      * <p> Method that calculates the determinant of two-dimensional matrix
      * </p>
@@ -124,6 +127,40 @@ public abstract class MatrixCalculator {
      */
     public static Double detMatrx2x2(Double[][] matrx){
         return matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
+    }
+
+    public static Double[] VECTORzeros(int sizeX){
+        Double[] temp = new Double[sizeX];
+        for (int i = 0; i < sizeX; i++) {
+                temp[i] = 0.0;
+        }
+        return temp;
+    }
+
+    public static void VECTORprint(Double[] vec){
+        for (Double d:vec) {
+            System.out.print(d + " ");
+        }
+
+    }
+
+    public static Double[] VECTORadd(Double[] vec1, Double[] vec2){
+        int len = vec1.length;
+
+        Double[] result = MatrixCalculator.VECTORzeros(len);
+        for (int i = 0; i < len; i++) {
+            result[i] = vec1[i] + vec2[i];
+        }
+        return result;
+    }
+    public static Double[] VECTORmultiply(Double[] vec1,Double value){
+        int len = vec1.length;
+
+        Double[] result = MatrixCalculator.VECTORzeros(len);
+        for (int i = 0; i < len; i++) {
+            result[i] = vec1[i] * value;
+        }
+        return result;
     }
 
 }

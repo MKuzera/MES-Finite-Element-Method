@@ -40,10 +40,10 @@ public class ElementUniversal {
     private Double kt;
     private Double alfa;
     private Double[][] Hbc;
+    private Double[] P;
 
 
 
-    //private Surface[] = new Surface; 4
 
     /**
      *
@@ -101,7 +101,7 @@ public class ElementUniversal {
                 // prints the final matrix H
            //     MatrixCalculator.printMatrix(H);
 
-                calcListofHBC();
+                calcHBCandP();
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
@@ -109,8 +109,18 @@ public class ElementUniversal {
 
     }
 
-    private void calcListofHBC() {
+    public Double[][] getHbc() {
+        return Hbc;
+    }
+
+    public Double[] getP() {
+        return P;
+    }
+
+    private void calcHBCandP() {
         Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
+        Hbc = surface.getFinalHBC();
+        P = surface.getFinalP();
     }
 
     public void initMatrices() {
@@ -120,6 +130,7 @@ public class ElementUniversal {
         etaArray = new Double[arraySizeBasedOnPointsOfIntegral];
         dets = new Double[arraySizeBasedOnPointsOfIntegral];
         Hbc = new Double[4][4];
+        P = new Double[4];
     }
     private void initKsiEtaCalcPointsArray() {
         if(pointsOfIntegral == 2){

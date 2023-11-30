@@ -143,6 +143,13 @@ public abstract class MatrixCalculator {
         }
 
     }
+    public static String VECTORtoString(Double[] vec){
+        StringBuilder s = new StringBuilder();
+        for (Double d:vec) {
+            s.append(d + " ");
+        }
+        return s.toString();
+    }
 
     public static Double[] VECTORadd(Double[] vec1, Double[] vec2){
         int len = vec1.length;

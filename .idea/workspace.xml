@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Calcs HBC for each Element">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Calcs P for each Element">
+      <change afterPath="$PROJECT_DIR$/src/Data/SOE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
@@ -115,7 +117,16 @@
       <workItem from="1700734913414" duration="2640000" />
       <workItem from="1700740585578" duration="153000" />
       <workItem from="1700741873837" duration="3210000" />
-      <workItem from="1700749833908" duration="4208000" />
+      <workItem from="1700749833908" duration="4229000" />
+      <workItem from="1700755236721" duration="17000" />
+      <workItem from="1700757243795" duration="14000" />
+      <workItem from="1700762816454" duration="153000" />
+      <workItem from="1700816131651" duration="12000" />
+      <workItem from="1700821057238" duration="671000" />
+      <workItem from="1700824005291" duration="432000" />
+      <workItem from="1700824687027" duration="101000" />
+      <workItem from="1701329842952" duration="17000" />
+      <workItem from="1701354687115" duration="3435000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -215,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700737484886</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Calcs P for each Element">
+      <created>1700755213143</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700755213143</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +266,7 @@
     <MESSAGE value="Prep work for Surface and Hbc" />
     <MESSAGE value="Works HBC for one element. Fix L/2, add grids to it." />
     <MESSAGE value="Calcs HBC for each Element" />
-    <option name="LAST_COMMIT_MESSAGE" value="Calcs HBC for each Element" />
+    <MESSAGE value="Calcs P for each Element" />
+    <option name="LAST_COMMIT_MESSAGE" value="Calcs P for each Element" />
   </component>
 </project>

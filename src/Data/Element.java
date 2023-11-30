@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class Element {
     ArrayList<Integer> ID = new ArrayList<>(4);
     Double[][] matrixH;
+    Double[][] matrixHBC;
+    Double[] matrixP;
 
     Double[] x; // needed for single element calc
     Double[] y; // needed for single element calc
@@ -43,13 +45,19 @@ public class Element {
     public String toString(){
         return ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3);
     }
-    public String toStringWithMatrixH(){
-        return "Element:" + ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3) +" H:\n"+ MatrixCalculator.toStringMatrix(matrixH);
+    public String toStringWithMatrices(){
+        return "Element:\n" + ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3) +" H:\n"+ MatrixCalculator.toStringMatrix(matrixH) + "\nHBC: \n" + MatrixCalculator.toStringMatrix(matrixHBC) + "\nP: \n"+ MatrixCalculator.VECTORtoString(matrixP);
     }
     public void setMatrixH(Double[][] H){
         this.matrixH = H;
     }
 
+    public void setMatrixHBC(Double[][] matrixHBC) {
+        this.matrixHBC = matrixHBC;
+    }
+    public void setMatrixP(Double[] matrixP) {
+        this.matrixP = matrixP;
+    }
 
     /**
      * <p>

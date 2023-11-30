@@ -36,7 +36,7 @@ public class Surface {
         finalP = MatrixCalculator.VECTORzeros(4);
         initValuesInCalcPoints();
         initDetJ();
-        calcListOfHBC();
+        calcHBCandP();
         //cut4x4to2x2HBCs();
         System.out.println("HBC");
         MatrixCalculator.printMatrix(finalHBC);
@@ -58,6 +58,10 @@ public class Surface {
         listOfDetJ.add(calcDistance(x[1],y[1],x[2],y[2]));
         listOfDetJ.add(calcDistance(x[2],y[2],x[3],y[3]));
         listOfDetJ.add(calcDistance(x[3],y[3],x[0],y[0]));
+//        System.out.println(element.toString());
+//        System.out.println("DETJ");
+//        System.out.print(listOfDetJ + " \n");
+
 
     }
 
@@ -73,9 +77,6 @@ public class Surface {
                     tempSurface[j][3] = 0.0;
 
                 }
-
-
-
             } else if (nrSurface == 1) {
                 for (int j = 0; j < calcPoints; j++) {
                     //prawa sciana
@@ -84,10 +85,6 @@ public class Surface {
                     tempSurface[j][2] = N3(1.0, gaussTable.pointsNum.get(j));
                     tempSurface[j][3] = 0.0;
                 }
-
-
-
-
             } else if (nrSurface == 2) {
                 for (int j = 0; j < calcPoints; j++) {
                     // gorna sciana
@@ -96,8 +93,6 @@ public class Surface {
                     tempSurface[j][2] = N3(gaussTable.reversePointsNum.get(j), 1.0);
                     tempSurface[j][3] = N4(gaussTable.reversePointsNum.get(j), 1.0);
                 }
-
-
             } else if (nrSurface == 3) {
 
                 for (int j = 0; j < calcPoints; j++) {
@@ -107,7 +102,6 @@ public class Surface {
                     tempSurface[j][2] = 0.0;
                     tempSurface[j][3] = N4(-1.0, gaussTable.reversePointsNum.get(j));
                 }
-
 
             }
 
@@ -124,7 +118,7 @@ public class Surface {
     }
 
 
-    private void calcListOfHBC() {
+    private void calcHBCandP() {
 
         for (int nrSurface = 0; nrSurface < 4; nrSurface++) {
 
@@ -171,78 +165,13 @@ public class Surface {
         }
     }
 
+    public Double[][] getFinalHBC() {
+        return finalHBC;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// sprawdza ktore sciany sa zewnetrzne i zwraca HBC[][] ktore jest suma HBC zewnetrzych scian
-
-
-
-
-
-
-     //   System.out.println("HBC");
-     //   System.out.println("dolna prawa gorna lewa");
-       // for (Double[][] x: listOfHBC) {
-      //      MatrixCalculator.printMatrix(x);
-      //      System.out.println();
-      //   }
-
-
-
-
-
-
-//    private void cut4x4to2x2HBCs() {
-//        Double[][] temp = new Double[2][2];
-//        int curX = 0,curY = 0;
-//        for(Double[][] hbc: listOfHBC){
-//            curX = 0;
-//            curY = 0;
-//            for(int i =0;i<4;i++){
-//                for (int j =0;j<4;j++){
-//                    if(hbc[i][j] != 0.0){
-//                        temp[curX][curY] = hbc[i][j];
-//                        curX+=1;
-//                        if(curX >1){
-//                            curX =0;
-//                            curY+=1;
-//                        }
-//                    }
-//                }
-//            }
-//            listOfHBC2x2.add(temp);
-//        }
-
-//        System.out.println("2x2");
-//        for (Double[][] x: listOfHBC2x2) {
-//
-//            for(int i =0; i< 2;i++){
-//                for (int j = 0; j < 2; j++) {
-//                    System.out.print(x[i][j]);
-//                }
-//                System.out.println();
-//            }
-//            System.out.println();
-//        }
-
+    public Double[] getFinalP() {
+        return finalP;
+    }
 
     public static double calcDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) / 2;

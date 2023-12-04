@@ -8,8 +8,8 @@ public class SOE {
     Grid grid;
     Element element;
     int size;
-    Double[][] matrixSOE;
-    Double[] matrixP;
+    Double[][] GLOBALmatrixH; //
+    Double[] GLOBALmatrixP; // BC warunek brzegowy
     ArrayList<Integer> IDs;
 
 
@@ -19,39 +19,53 @@ public class SOE {
         this.grid = grid;
         this.size = size;
 
-        this.matrixSOE = MatrixCalculator.zeros(size,size);
-        this.matrixP = MatrixCalculator.VECTORzeros(size);
+        this.GLOBALmatrixH = MatrixCalculator.zeros(size,size);
+        this.GLOBALmatrixP = MatrixCalculator.VECTORzeros(size);
 
 
 
-        calcMatrixSOE();
+        calcGlobalHandP(); // agregacja macierzy
         System.out.println("\nP ");
-        MatrixCalculator.VECTORprint(matrixP);
+        MatrixCalculator.VECTORprint(GLOBALmatrixP);
         System.out.println("\nH ");
-        MatrixCalculator.printMatrix(matrixSOE);
+        MatrixCalculator.printMatrix(GLOBALmatrixH);
 
     }
 
-    private void calcMatrixSOE() {
+    private void calcGlobalHandP() {
 
 
         for (Element element: grid.elements) {
 
-            Double[][] sumH = MatrixCalculator.addMatrices(element.matrixH,element.matrixHBC);
+
             IDs = element.ID;
+          //  Double[][] tempH = MatrixCalculator.zeros(4,4);
+          //  Double[] tempP = MatrixCalculator.VECTORzeros(4);
             // calc P
+
             for (int i = 0 ;i < 4 ; i++){
-                matrixP[IDs.get(i)-1] += element.matrixP[i];
+            //    tempP[i]+= element.matrixP[i];
+
+                // agregacja macierzy w przestrzeni 1D
+                GLOBALmatrixP[IDs.get(i)-1] += element.matrixP[i];
             }
 
             // calc H
 
+            Double[][] tempHandHBC = MatrixCalculator.addMatrices(element.matrixH,element.matrixHBC);
             for (int i = 0 ;i < 4 ; i++){
                 for(int j=0; j<4; j++){
-                    matrixSOE[IDs.get(i)-1][IDs.get(j)-1] += element.matrixH[i][j];
+                 //   tempH[i][j] +=  tempHandHBC[i][j];
+
+                    // agregacja macierzy w przestrzeni 2D
+                    // odrazu z ukladu globalnego czyli
+                    // element z node np 1 2 6 5 na -> ID1 ID2 ID3 ID4 i wstawia
+                    GLOBALmatrixH[IDs.get(i)-1][IDs.get(j)-1] += tempHandHBC[i][j];
                 }
             }
-            // poprawic XD
+         //   System.out.println();
+         //   MatrixCalculator.printMatrix(tempH);
+
 
 
         }

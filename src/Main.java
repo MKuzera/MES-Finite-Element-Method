@@ -52,7 +52,7 @@ public class Main {
 
 
         }
-
+        System.out.println();
         SOE soe = new SOE(grid,GlobalData.nodesNumber);
 
       //  Element element = new Element(new Double[]{0.0,0.025,0.025,0.0}, new Double[]{0.0,0.0,0.025,0.025});

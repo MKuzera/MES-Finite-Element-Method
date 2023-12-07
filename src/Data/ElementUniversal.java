@@ -41,9 +41,11 @@ public class ElementUniversal {
     private Double alfa;
     private Double[][] Hbc;
     private Double[] P;
+    private Double[][] matrixC;
 
-
-
+    public Double[][] getMatrixC() {
+        return matrixC;
+    }
 
     /**
      *
@@ -79,6 +81,8 @@ public class ElementUniversal {
                 this.pointsOfIntegral = pointsOfIntegral;
                 this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
 
+
+
                 // inits empty matrices (ksi/eta Array, dNdksi dNdeta, dets)
                 initMatrices();
 
@@ -99,15 +103,74 @@ public class ElementUniversal {
                 calculateFinalHforElement();
 
                 // prints the final matrix H
-           //     MatrixCalculator.printMatrix(H);
+              //  System.out.println("Matrix H");
+              //  MatrixCalculator.printMatrix(H);
 
                 calcHBCandP();
+
+
+
+                calcMatrixC();
+                System.out.println("matrixC");
+                MatrixCalculator.printMatrix(matrixC);
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
         }
 
     }
+
+    private void calcMatrixC() {
+        Double[][] matrixFunKsztaltu = new Double[arraySizeBasedOnPointsOfIntegral][4];
+
+        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
+                matrixFunKsztaltu[i][0]=funKsztaltu1(etaArray[i],ksiArray[i]);
+                matrixFunKsztaltu[i][1]=funKsztaltu2(etaArray[i],ksiArray[i]);
+                matrixFunKsztaltu[i][2]=funKsztaltu3(etaArray[i],ksiArray[i]);
+                matrixFunKsztaltu[i][3]=funKsztaltu4(etaArray[i],ksiArray[i]);
+        }
+     //   MatrixCalculator.printMatrix(matrixFunKsztaltu);
+
+        ArrayList<Double[][]> listOfCMatrices = new ArrayList<>();
+
+        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
+            Double[][] matrixLocalC = new Double[4][4];
+            matrixLocalC = MatrixCalculator.multiplyVectorByItsOwnTranspose(matrixFunKsztaltu[i]);
+            matrixLocalC = MatrixCalculator.multiplyMatrixByValue(matrixLocalC,GlobalData.specificHeat * GlobalData.density * dets[i]);
+
+            //System.out.println(GlobalData.specificHeat + " * " + GlobalData.density + " * " + dets[i]);
+
+            // matrix transponowana * cieplowlasciwe * gestosc * detJ wyznacznik
+            listOfCMatrices.add(matrixLocalC);
+        }
+        GaussTable gaussTable = new GaussTable(pointsOfIntegral);
+
+        int weightX = 0;
+        int weightY = 0;
+
+        Double[][] C = MatrixCalculator.zeros(4,4);
+        Double[][] temp = MatrixCalculator.zeros(4,4);
+
+        for (int k =0; k<arraySizeBasedOnPointsOfIntegral; k++) {
+
+            temp = MatrixCalculator.multiplyMatrixByValue(listOfCMatrices.get(k),(
+                    gaussTable.weights.get(weightX)*gaussTable.weights.get(weightY)));
+
+            C = MatrixCalculator.addMatrices(C,temp);
+
+
+            weightX+=1;
+            if(weightX == pointsOfIntegral){
+                weightY+=1;
+                weightX=0;
+            }
+        }
+
+
+        matrixC = C;
+
+    }
+
 
     public Double[][] getHbc() {
         return Hbc;
@@ -136,7 +199,7 @@ public class ElementUniversal {
         if(pointsOfIntegral == 2){
             Double f = Math.sqrt(1.0/3.0);
             etaArray = new Double[]{-f,-f,f,f};
-            ksiArray = new Double[]{-f,f,-f,f};
+            ksiArray = new Double[]{-f,f,f,-f};
 
         } else if (pointsOfIntegral == 3) {
             Double f = Math.sqrt(3.0/5.0);
@@ -282,6 +345,19 @@ public class ElementUniversal {
     }
 
 
+    private Double funKsztaltu1(Double eta, Double ksi){
+
+        return 0.25*(1.0-ksi)*(1.0-eta);
+    }
+    private Double funKsztaltu2(Double eta, Double ksi){
+        return 0.25*(1.0+ksi)*(1.0-eta);
+    }
+    private Double funKsztaltu3(Double eta, Double ksi){
+        return 0.25*(1.0+ksi)*(1.0+eta);
+    }
+    private Double funKsztaltu4(Double eta, Double ksi){
+        return 0.25*(1.0-ksi)*(1.0+eta);
+    }
 
     private double dN1dS(Double eta){
         return -0.25*(1.0-eta);

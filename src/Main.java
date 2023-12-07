@@ -46,14 +46,16 @@ public class Main {
             element.setMatrixH(elementUniversal.getH());
             element.setMatrixHBC(elementUniversal.getHbc());
             element.setMatrixP(elementUniversal.getP());
+            element.setMatrixC(elementUniversal.getMatrixC());
 
-            System.out.println(element.toStringWithMatrices());
+
+           // System.out.println(element.toStringWithMatrices());
 
 
 
         }
-        System.out.println();
-        SOE soe = new SOE(grid,GlobalData.nodesNumber);
+       // System.out.println();
+       // SOE soe = new SOE(grid,GlobalData.nodesNumber);
 
       //  Element element = new Element(new Double[]{0.0,0.025,0.025,0.0}, new Double[]{0.0,0.0,0.025,0.025});
      //   ElementUniversal elementUniversal = new ElementUniversal(2,element,GlobalData.conductivity,grid,25.0);

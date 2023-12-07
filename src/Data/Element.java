@@ -13,6 +13,11 @@ public class Element {
     Double[][] matrixH;
     Double[][] matrixHBC;
     Double[] matrixP;
+    Double[][] matrixC;
+
+    public void setMatrixC(Double[][] matrixC) {
+        this.matrixC = matrixC;
+    }
 
     Double[] x; // needed for single element calc
     Double[] y; // needed for single element calc

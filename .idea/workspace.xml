@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="soe added, fix it">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Matrix Agregation added for Global H matrix and global P (BC) matrix. In SOE.java file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/SOE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/SOE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +127,8 @@
       <workItem from="1701354687115" duration="3603000" />
       <workItem from="1701420686903" duration="11000" />
       <workItem from="1701585100040" duration="459000" />
-      <workItem from="1701698471152" duration="1365000" />
+      <workItem from="1701698471152" duration="1779000" />
+      <workItem from="1701959375698" duration="4124000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -239,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701359917166</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Matrix Agregation added for Global H matrix and global P (BC) matrix. In SOE.java file">
+      <created>1701700254741</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1701700254741</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +284,7 @@
     <MESSAGE value="Calcs HBC for each Element" />
     <MESSAGE value="Calcs P for each Element" />
     <MESSAGE value="soe added, fix it" />
-    <option name="LAST_COMMIT_MESSAGE" value="soe added, fix it" />
+    <MESSAGE value="Matrix Agregation added for Global H matrix and global P (BC) matrix. In SOE.java file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Matrix Agregation added for Global H matrix and global P (BC) matrix. In SOE.java file" />
   </component>
 </project>

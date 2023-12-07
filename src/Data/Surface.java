@@ -38,11 +38,11 @@ public class Surface {
         initDetJ();
         calcHBCandP();
         //cut4x4to2x2HBCs();
-        System.out.println("HBC");
-        MatrixCalculator.printMatrix(finalHBC);
-        System.out.println("P");
-        MatrixCalculator.VECTORprint(finalP);
-        System.out.println();
+   //     System.out.println("HBC");
+    //    MatrixCalculator.printMatrix(finalHBC);
+    //    System.out.println("P");
+    //    MatrixCalculator.VECTORprint(finalP);
+   //     System.out.println();
 
 
 

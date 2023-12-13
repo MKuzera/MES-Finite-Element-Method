@@ -1,5 +1,7 @@
 import Data.*;
 
+import Functions.MatrixCalculator;
+import Gauss.GaussElimination;
 import IO.DataImporter;
 
 import java.io.FileNotFoundException;
@@ -55,7 +57,44 @@ public class Main {
 
         }
        // System.out.println();
-       // SOE soe = new SOE(grid,GlobalData.nodesNumber);
+        // tu liczy globalne
+        SOE soe = new SOE(grid,GlobalData.nodesNumber);
+
+        Double[][] czesc1 = MatrixCalculator.addMatrices(soe.getGLOBALmatrixH(),soe.getGLOBALmatrixC());
+        System.out.println("H + C");
+        MatrixCalculator.printMatrix(czesc1);
+
+
+
+
+
+        Double[] t0 = new Double[16];
+        for(int i = 0;i<16;i++){
+            t0[i]= GlobalData.initialTemp;
+        }
+        System.out.println("t0");
+        MatrixCalculator.VECTORprint(t0);
+        Double[][] matirxC = soe.getGLOBALmatrixC();
+        System.out.println("C");
+        MatrixCalculator.printMatrix(matirxC);
+
+        Double[][] czesc2 = MatrixCalculator.divideMatrixByValue(matirxC,1.0); // juz wczesniej mnoze w SOE / 50.0
+        System.out.println("czesc2 C/50");
+        MatrixCalculator.printMatrix(czesc2);
+        Double[] czesc3 = MatrixCalculator.multiply(czesc2,t0);
+
+
+        Double[] czesc4 = MatrixCalculator.VECTORadd(soe.getGLOBALmatrixP(),czesc3);
+        System.out.println("P + c/dt * t0");
+        MatrixCalculator.VECTORprint(czesc4);
+
+        Double[] czesc5 = {21280.4, 21601.4, 14537.1, 9873.93, 21601.3, 12945.4, 10223.4, 14537.1, 14537.1, 10223.4, 12945.4, 21601.4, 9873.93, 14537.1, 21601.4, 21280.4};
+
+        System.out.println("WYnik");
+        Double[] wynik = GaussElimination.solve(czesc1,czesc4);
+        MatrixCalculator.VECTORprint(wynik);
+
+
 
       //  Element element = new Element(new Double[]{0.0,0.025,0.025,0.0}, new Double[]{0.0,0.0,0.025,0.025});
      //   ElementUniversal elementUniversal = new ElementUniversal(2,element,GlobalData.conductivity,grid,25.0);

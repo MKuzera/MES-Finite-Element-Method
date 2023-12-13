@@ -109,7 +109,6 @@ public class ElementUniversal {
                 calcHBCandP();
 
 
-
                 calcMatrixC();
                 System.out.println("matrixC");
                 MatrixCalculator.printMatrix(matrixC);
@@ -185,6 +184,7 @@ public class ElementUniversal {
         Hbc = surface.getFinalHBC();
         P = surface.getFinalP();
     }
+
 
     public void initMatrices() {
         dNdKsi = new Double[arraySizeBasedOnPointsOfIntegral][4];

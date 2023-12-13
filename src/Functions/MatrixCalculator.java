@@ -150,6 +150,58 @@ public abstract class MatrixCalculator {
         }
         return s.toString();
     }
+    public static Double[][] divideMatrixByValue(Double[][] matrix, Double value ){
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        Double[][] nMatrix = MatrixCalculator.zeros(rows,cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                nMatrix[i][j] = matrix[i][j] / value;
+            }
+        }
+        return nMatrix;
+    }
+    public static Double[] multiplyMatrixByVector(Double[][] matrix, Double[] vector) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        System.out.println("Matrix size: " + rows + " " + cols + "vector size " + vector.length);
+
+        if (cols != vector.length) {
+            throw new IllegalArgumentException("Matrix columns must be equal to vector length");
+        }
+
+        Double[] result = MatrixCalculator.VECTORzeros(rows);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result[i] += matrix[i][j] * vector[j];
+            }
+        }
+
+        return result;
+    }
+
+    public static Double[] multiply(Double[][] matrix, Double[] vector) {
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+
+        Double[] result = new Double[rows];
+
+        for (int row = 0; row < rows; row++) {
+            Double sum = 0.0;
+            for (int column = 0; column < columns; column++) {
+                sum += matrix[row][column]
+                        * vector[column];
+            }
+            result[row] = sum;
+        }
+        return result;
+    }
+
+
+
 
     public static Double[] VECTORadd(Double[] vec1, Double[] vec2){
         int len = vec1.length;
@@ -157,6 +209,16 @@ public abstract class MatrixCalculator {
         Double[] result = MatrixCalculator.VECTORzeros(len);
         for (int i = 0; i < len; i++) {
             result[i] = vec1[i] + vec2[i];
+        }
+        return result;
+    }
+
+    public static Double[] VECTORsub(Double[] vec1, Double[] vec2){
+        int len = vec1.length;
+
+        Double[] result = MatrixCalculator.VECTORzeros(len);
+        for (int i = 0; i < len; i++) {
+            result[i] = vec1[i] - vec2[i];
         }
         return result;
     }

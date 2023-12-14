@@ -50,6 +50,15 @@ public class Element {
     public String toString(){
         return ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3);
     }
+    public String toStringvminus1(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(ID.get(0)-1).append(" ");
+        stringBuilder.append(ID.get(1)-1).append(" ");
+        stringBuilder.append(ID.get(2)-1).append(" ");
+        stringBuilder.append(ID.get(3)-1).append(" ");
+
+        return stringBuilder.toString();
+    }
     public String toStringWithMatrices(){
         return "Element:\n" + ID.get(0) + " " + ID.get(1) + " " + ID.get(2) + " " + ID.get(3) +" H:\n"+ MatrixCalculator.toStringMatrix(matrixH) + "\nHBC: \n" + MatrixCalculator.toStringMatrix(matrixHBC) + "\nP: \n"+ MatrixCalculator.VECTORtoString(matrixP);
     }

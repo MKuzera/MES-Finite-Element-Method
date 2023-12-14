@@ -110,8 +110,8 @@ public class ElementUniversal {
 
 
                 calcMatrixC();
-                System.out.println("matrixC");
-                MatrixCalculator.printMatrix(matrixC);
+//                System.out.println("matrixC");
+//                MatrixCalculator.printMatrix(matrixC);
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
@@ -165,11 +165,9 @@ public class ElementUniversal {
             }
         }
 
-
         matrixC = C;
 
     }
-
 
     public Double[][] getHbc() {
         return Hbc;

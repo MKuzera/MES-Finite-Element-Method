@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added matrixC">
-      <change afterPath="$PROJECT_DIR$/src/Gauss/GaussElimination.java" afterDir="false" />
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added eq">
+      <change afterPath="$PROJECT_DIR$/src/IO/ExportToTVKFiles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/SOE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/SOE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +132,8 @@
       <workItem from="1701959375698" duration="4393000" />
       <workItem from="1702369573695" duration="5000" />
       <workItem from="1702464041023" duration="1041000" />
-      <workItem from="1702476401434" duration="4174000" />
+      <workItem from="1702476401434" duration="4439000" />
+      <workItem from="1702563995740" duration="9202000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -260,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701964750990</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added eq">
+      <created>1702480879570</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1702480879570</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +305,7 @@
     <MESSAGE value="soe added, fix it" />
     <MESSAGE value="Matrix Agregation added for Global H matrix and global P (BC) matrix. In SOE.java file" />
     <MESSAGE value="Added matrixC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added matrixC" />
+    <MESSAGE value="Added eq" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added eq" />
   </component>
 </project>

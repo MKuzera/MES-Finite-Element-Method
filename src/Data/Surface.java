@@ -5,6 +5,7 @@ import Gauss.GaussTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 
 public class Surface {
@@ -128,7 +129,15 @@ public class Surface {
             if (tempnumber > 3) tempnumber = 0;
             int node2 = element.ID.get(tempnumber);
 
+
+
             if (GlobalData.DC.contains(node1) && GlobalData.DC.contains(node2)) {
+//                System.out.println("\n");
+//                System.out.print(node1);
+//                System.out.print(" ");
+//                System.out.print(node2);
+
+
                 ArrayList<Double[][]> lisofTempsHBC = new ArrayList<>(calcPoints);
                 ArrayList<Double[]> lisofTempsP = new ArrayList<>(calcPoints);
 
@@ -156,6 +165,10 @@ public class Surface {
                 temp = MatrixCalculator.multiplyMatrixByValue(temp, listOfDetJ.get(nrSurface));
                 tempP = MatrixCalculator.VECTORmultiply(tempP,listOfDetJ.get(nrSurface));
 
+//                System.out.println("HBC: ");
+//                MatrixCalculator.printMatrix(temp);
+//                System.out.println("P: ");
+//                MatrixCalculator.VECTORprint(tempP);
                 finalHBC = MatrixCalculator.addMatrices(finalHBC, temp);
                 finalP = MatrixCalculator.VECTORadd(finalP,tempP);
 

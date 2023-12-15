@@ -98,12 +98,12 @@ public class Main {
             t0 = MatrixCalculator.VECTORzeros(16);
             Double[] prevT;
             prevT = wyniki.get(iter).clone();
-            System.out.println("x");
-            MatrixCalculator.VECTORprint(t0);
+//            System.out.println("x");
+//            MatrixCalculator.VECTORprint(t0);
             System.out.println(t0.length);
             System.out.println(prevT.length);
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 16; i++) {
                 System.out.println("XDD " + i);
                 t0[i] = prevT[i];
             }
@@ -124,8 +124,11 @@ public class Main {
             System.out.println("P ");
             MatrixCalculator.VECTORprint(soe.getGLOBALmatrixP());
 
-           // Double[] czesc4 = MatrixCalculator.VECTORadd(soe.getGLOBALmatrixP(), czesc3);
-            Double[] czesc4 = {21280.4, 21601.4, 14537.1, 9873.93, 21601.3, 12945.4, 10223.4, 14537.1, 14537.1, 10223.4, 12945.4, 21601.4, 9873.93, 14537.1, 21601.4, 21280.4};
+            Double[] czesc4 = MatrixCalculator.VECTORadd(soe.getGLOBALmatrixP(), czesc3);
+
+
+
+
 //          System.out.println("\nP + c/dt * t0");
 //          MatrixCalculator.VECTORprint(czesc4);
 //        System.out.println("WYnik");
@@ -134,7 +137,7 @@ public class Main {
 
             wyniki.add(wynik);
             iter+=1;
-            break;
+
         }
 
         int k =0;

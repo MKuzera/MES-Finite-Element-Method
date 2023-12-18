@@ -2,6 +2,8 @@
 package Functions;
 
 import java.nio.DoubleBuffer;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * <p>MatrixCalculator is a simple calculator used to calculate <b>two-dimensional matrices</b> in an application.
@@ -166,7 +168,7 @@ public abstract class MatrixCalculator {
         int rows = matrix.length;
         int cols = matrix[0].length;
 
-        System.out.println("Matrix size: " + rows + " " + cols + "vector size " + vector.length);
+
 
         if (cols != vector.length) {
             throw new IllegalArgumentException("Matrix columns must be equal to vector length");
@@ -187,11 +189,13 @@ public abstract class MatrixCalculator {
         int rows = matrix.length;
         int columns = matrix[0].length;
 
+
         Double[] result = new Double[rows];
 
         for (int row = 0; row < rows; row++) {
             Double sum = 0.0;
             for (int column = 0; column < columns; column++) {
+
                 sum += matrix[row][column]
                         * vector[column];
             }

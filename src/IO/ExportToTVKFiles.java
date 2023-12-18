@@ -36,13 +36,13 @@ public class ExportToTVKFiles {
             stringBuilder.append("4 ").append(GlobalData.elements.get(i).toStringvminus1()).append("\n");
         }
         stringBuilder.append("\n");
-        stringBuilder.append("CELL_TYPES 9\n");
+        stringBuilder.append("CELL_TYPES "+GlobalData.elementsNumber+"\n");
         for (int i = 0; i < GlobalData.elementsNumber; i++) {
             stringBuilder.append("9\n");
         }
 
         stringBuilder.append("\n");
-        stringBuilder.append("POINT_DATA 16\n");
+        stringBuilder.append("POINT_DATA "+GlobalData.nodesNumber+"\n");
         stringBuilder.append("SCALARS Temp float 1\n");
         stringBuilder.append("LOOKUP_TABLE default\n");
             for (Double d:wynik) {

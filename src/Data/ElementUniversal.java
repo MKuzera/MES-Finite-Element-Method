@@ -47,10 +47,7 @@ public class ElementUniversal {
         return matrixC;
     }
 
-    /**
-     *
-     * @return matrix H
-     */
+
     public Double[][] getH() {
         return H;
     }
@@ -70,17 +67,13 @@ public class ElementUniversal {
 
                 Double[][] XY = element.createXYListBasedOnElement(grid);
                 this.grid = grid;
-                //Double[][] XY = element.createXYbasenOnPointXY();
-
                 this.element = element;
-
                 this.kt =kt;
                 this.alfa= alfa;
                 this.x = XY[0];
                 this.y =  XY[1];
                 this.pointsOfIntegral = pointsOfIntegral;
                 this.arraySizeBasedOnPointsOfIntegral = pointsOfIntegral * pointsOfIntegral;
-
 
 
                 // inits empty matrices (ksi/eta Array, dNdksi dNdeta, dets)
@@ -102,85 +95,17 @@ public class ElementUniversal {
                 // following Matrices H from the HMatrixesList by appropriate weights
                 calculateFinalHforElement();
 
-                // prints the final matrix H
-              //  System.out.println("Matrix H");
-              //  MatrixCalculator.printMatrix(H);
-
+                // calc the HBC and P matrices for this element
                 calcHBCandP();
 
-
+               // calc the C matrix for this element
                 calcMatrixC();
-//                System.out.println("matrixC");
-//                MatrixCalculator.printMatrix(matrixC);
+
         }
         else{
                 throw new BadPointsOfIntegralException("Avaible Options: 2,3,4, entered: " + pointsOfIntegral);
         }
 
-    }
-
-    private void calcMatrixC() {
-        Double[][] matrixFunKsztaltu = new Double[arraySizeBasedOnPointsOfIntegral][4];
-
-        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
-                matrixFunKsztaltu[i][0]=funKsztaltu1(etaArray[i],ksiArray[i]);
-                matrixFunKsztaltu[i][1]=funKsztaltu2(etaArray[i],ksiArray[i]);
-                matrixFunKsztaltu[i][2]=funKsztaltu3(etaArray[i],ksiArray[i]);
-                matrixFunKsztaltu[i][3]=funKsztaltu4(etaArray[i],ksiArray[i]);
-        }
-     //   MatrixCalculator.printMatrix(matrixFunKsztaltu);
-
-        ArrayList<Double[][]> listOfCMatrices = new ArrayList<>();
-
-        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
-            Double[][] matrixLocalC = new Double[4][4];
-            matrixLocalC = MatrixCalculator.multiplyVectorByItsOwnTranspose(matrixFunKsztaltu[i]);
-            matrixLocalC = MatrixCalculator.multiplyMatrixByValue(matrixLocalC,GlobalData.specificHeat * GlobalData.density * dets[i]);
-
-            //System.out.println(GlobalData.specificHeat + " * " + GlobalData.density + " * " + dets[i]);
-
-            // matrix transponowana * cieplowlasciwe * gestosc * detJ wyznacznik
-            listOfCMatrices.add(matrixLocalC);
-        }
-        GaussTable gaussTable = new GaussTable(pointsOfIntegral);
-
-        int weightX = 0;
-        int weightY = 0;
-
-        Double[][] C = MatrixCalculator.zeros(4,4);
-        Double[][] temp = MatrixCalculator.zeros(4,4);
-
-        for (int k =0; k<arraySizeBasedOnPointsOfIntegral; k++) {
-
-            temp = MatrixCalculator.multiplyMatrixByValue(listOfCMatrices.get(k),(
-                    gaussTable.weights.get(weightX)*gaussTable.weights.get(weightY)));
-
-            C = MatrixCalculator.addMatrices(C,temp);
-
-
-            weightX+=1;
-            if(weightX == pointsOfIntegral){
-                weightY+=1;
-                weightX=0;
-            }
-        }
-
-        matrixC = C;
-
-    }
-
-    public Double[][] getHbc() {
-        return Hbc;
-    }
-
-    public Double[] getP() {
-        return P;
-    }
-
-    private void calcHBCandP() {
-        Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
-        Hbc = surface.getFinalHBC();
-        P = surface.getFinalP();
     }
 
 
@@ -237,10 +162,6 @@ public class ElementUniversal {
         // macierz jakobiego
         Double[][] matrx = new Double[2][2];
 
-       // System.out.println("dNdETA");
-     //   MatrixCalculator.printMatrix(dNdEta);
-     //   System.out.println("dNdKSI");
-      //  MatrixCalculator.printMatrix(dNdKsi);
 
         for (int i =0; i< arraySizeBasedOnPointsOfIntegral;i++) {
 
@@ -278,14 +199,7 @@ public class ElementUniversal {
                 dNdX[i][k] = (matrx[1][1]*dNdKsi[i][k] + matrx[1][0]*dNdEta[i][k]) ;
                 dNdY[i][k] = (matrx[0][1]*dNdKsi[i][k] + matrx[0][0]*dNdEta[i][k]) ;
            }
-
-
         }
-//        System.out.println("DNDX");
-//        MatrixCalculator.printMatrix(dNdX);
-//        System.out.println("DNDY");
-//        MatrixCalculator.printMatrix(dNdY);
-//        System.out.println();
     }
 
     private void calcListofMatrixesH(){
@@ -311,8 +225,6 @@ public class ElementUniversal {
 
             matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,kt*dets[i]);
 
-//            System.out.println("H matrix nr" + i);
-//            MatrixCalculator.printMatrix(matrixH);
             HMatrixesList.add(matrixH);
         }
 
@@ -339,6 +251,62 @@ public class ElementUniversal {
                 weightX=0;
             }
         }
+
+    }
+
+    private void calcHBCandP() {
+        Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
+        Hbc = surface.getFinalHBC();
+        P = surface.getFinalP();
+    }
+
+    private void calcMatrixC() {
+        Double[][] matrixFunKsztaltu = new Double[arraySizeBasedOnPointsOfIntegral][4];
+
+        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
+            matrixFunKsztaltu[i][0]=funKsztaltu1(etaArray[i],ksiArray[i]);
+            matrixFunKsztaltu[i][1]=funKsztaltu2(etaArray[i],ksiArray[i]);
+            matrixFunKsztaltu[i][2]=funKsztaltu3(etaArray[i],ksiArray[i]);
+            matrixFunKsztaltu[i][3]=funKsztaltu4(etaArray[i],ksiArray[i]);
+        }
+        //   MatrixCalculator.printMatrix(matrixFunKsztaltu);
+
+        ArrayList<Double[][]> listOfCMatrices = new ArrayList<>();
+
+        for (int i = 0; i < arraySizeBasedOnPointsOfIntegral; i++) {
+            Double[][] matrixLocalC = new Double[4][4];
+            matrixLocalC = MatrixCalculator.multiplyVectorByItsOwnTranspose(matrixFunKsztaltu[i]);
+            matrixLocalC = MatrixCalculator.multiplyMatrixByValue(matrixLocalC,GlobalData.specificHeat * GlobalData.density * dets[i]);
+
+            //System.out.println(GlobalData.specificHeat + " * " + GlobalData.density + " * " + dets[i]);
+
+            // matrix transponowana * cieplowlasciwe * gestosc * detJ wyznacznik
+            listOfCMatrices.add(matrixLocalC);
+        }
+        GaussTable gaussTable = new GaussTable(pointsOfIntegral);
+
+        int weightX = 0;
+        int weightY = 0;
+
+        Double[][] C = MatrixCalculator.zeros(4,4);
+        Double[][] temp = MatrixCalculator.zeros(4,4);
+
+        for (int k =0; k<arraySizeBasedOnPointsOfIntegral; k++) {
+
+            temp = MatrixCalculator.multiplyMatrixByValue(listOfCMatrices.get(k),(
+                    gaussTable.weights.get(weightX)*gaussTable.weights.get(weightY)));
+
+            C = MatrixCalculator.addMatrices(C,temp);
+
+
+            weightX+=1;
+            if(weightX == pointsOfIntegral){
+                weightY+=1;
+                weightX=0;
+            }
+        }
+
+        matrixC = C;
 
     }
 
@@ -380,6 +348,14 @@ public class ElementUniversal {
     private double dN3dn(Double ksi){ return 0.25*(1.0+ksi);}
     private double dN4dn(Double ksi){
         return 0.25*(1.0-ksi);
+    }
+
+    public Double[][] getHbc() {
+        return Hbc;
+    }
+
+    public Double[] getP() {
+        return P;
     }
 }
 

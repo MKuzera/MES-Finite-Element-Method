@@ -10,7 +10,6 @@ public class SOE {
     int size;
     Double[][] GLOBALmatrixH; //
     // H + HBC ! uwzglednione
-
     Double[] GLOBALmatrixP; // BC warunek brzegowy
     Double[][] GLOBALmatrixC; //
     // C / deltaT UWZGLEDNIONE!!!
@@ -30,12 +29,13 @@ public class SOE {
 
 
         calcGlobalHandP(); // agregacja macierzy
-        System.out.println("\nP ");
-        MatrixCalculator.VECTORprint(GLOBALmatrixP);
-        System.out.println("\nH ");
-        MatrixCalculator.printMatrix(GLOBALmatrixH);
-        System.out.println("\nC ");
-        MatrixCalculator.printMatrix(GLOBALmatrixC);
+
+//        System.out.println("\nP ");
+//        MatrixCalculator.VECTORprint(GLOBALmatrixP);
+//        System.out.println("\nH ");
+//        MatrixCalculator.printMatrix(GLOBALmatrixH);
+//        System.out.println("\nC ");
+//        MatrixCalculator.printMatrix(GLOBALmatrixC);
 
     }
 
@@ -57,24 +57,20 @@ public class SOE {
         for (Element element: grid.elements) {
 
             IDs = element.ID;
-          //  Double[][] tempH = MatrixCalculator.zeros(4,4);
-          //  Double[] tempP = MatrixCalculator.VECTORzeros(4);
-            // calc P
 
             for (int i = 0 ;i < 4 ; i++){
-            //    tempP[i]+= element.matrixP[i];
 
                 // agregacja macierzy w przestrzeni 1D
                 GLOBALmatrixP[IDs.get(i)-1] += element.matrixP[i];
             }
 
-            // calc H
 
             Double[][] tempHandHBC = MatrixCalculator.addMatrices(element.matrixH,element.matrixHBC);
-            Double[][] tempCDivDeltaT = MatrixCalculator.divideMatrixByValue(element.matrixC,50.0);
+            Double[][] tempCDivDeltaT = MatrixCalculator.divideMatrixByValue(element.matrixC,GlobalData.simulationStepTime);
+
+
             for (int i = 0 ;i < 4 ; i++){
                 for(int j=0; j<4; j++){
-                 //   tempH[i][j] +=  tempHandHBC[i][j];
 
                     // agregacja macierzy w przestrzeni 2D
                     // odrazu z ukladu globalnego czyli
@@ -84,9 +80,6 @@ public class SOE {
                     GLOBALmatrixC[IDs.get(i)-1][IDs.get(j)-1] += tempCDivDeltaT[i][j];
                 }
             }
-         //   System.out.println();
-         //   MatrixCalculator.printMatrix(tempH);
-
 
 
         }

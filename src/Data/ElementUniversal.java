@@ -86,7 +86,7 @@ public class ElementUniversal {
                 initdNdKsidNdEta();
 
                 // inits the Jacobian Matrix, calculates the dets[] and dNdX dNdY matrices
-                initJakobian();
+                initJakobianAndInterpolate();
 
                 // inits the HMatrixesList and calculates H for each calc point
                 calcListofMatrixesH();
@@ -108,7 +108,7 @@ public class ElementUniversal {
 
     }
 
-
+    // inicjuje puste tablice
     public void initMatrices() {
         dNdKsi = new Double[arraySizeBasedOnPointsOfIntegral][4];
         dNdEta = new Double[arraySizeBasedOnPointsOfIntegral][4];
@@ -118,6 +118,12 @@ public class ElementUniversal {
         Hbc = new Double[4][4];
         P = new Double[4];
     }
+    // inicjuje wartości tablic etaArray oraz ksiArray. Określają one wartości współrzędnych
+    // ksi oraz eta w układzie 2d.
+    // Wartości f / (f1 f2) są to wartości punktów całkowania z tablicy gausa.
+    // to czy ma - czy + zależy czy leży powyżej/poniżej swojej osi czy może jest równe 0
+    // Potrzebne jest to po to aby przejsc z ukladu globalnego xy na uklad ksi/eta gdzie
+    // Bede mógł policzyć całke z powierzchni.
     private void initKsiEtaCalcPointsArray() {
         if(pointsOfIntegral == 2){
             Double f = Math.sqrt(1.0/3.0);
@@ -139,7 +145,11 @@ public class ElementUniversal {
         }
 
     }
-
+    // dNdEta oraz dNdKsi są to tablice zawierające wartości funkcji kształtu dla danego punktu całkowania.
+    // dNdEta[0],dNdKsi[0] zawieraja wartości funkcji kształtu dla 1 punktu całkowania w układzie
+    // funkcje ksztaltu dla tego elementu istanieja tylko w ukladzie lokalnym
+    // potrzebujemy je w celu interpolowania wspolrzednych (nie mozemy calkowac dla ukladu globalnego x,y gdzie nie wiemy
+    // jaki punkt całkowania mamy uzyc)
     private void initdNdKsidNdEta() {
         // innits the dNdKsi and dNdEta matrix
         for(int i =0;i<arraySizeBasedOnPointsOfIntegral;i++) {
@@ -155,81 +165,99 @@ public class ElementUniversal {
         }
     }
 
-    private void initJakobian() {
-        // utowrzenie macierzy dNdX dNdY o wielkosci liczbapunktcalkowania^2 i 4 (4 jest zawsze stałe)
+    // Obliczenie Jakobianu dla elementu. Macierz jakobiego/macierz przeksztalcenia
+    // Jakobian przeksztalcenia detJ jest to macierz pochodnych czastkowych odwzorowania geometrycznego
+    // czyli dzieki niemu wiemy jak zachowac dlugosc? wag? a bardziej proporcje pomiedzy naszym elementem w xy a elementem w ksi eta (uklad globalny -> lokalny)
+    //
+    // Macierz jakobiego mowi jak geometrycznie zmienil sie element uklad xy wzgledem ukladu ksieta
+    // rowniez interpoluje z wsp ksieta na wsp XY
+    // wagi w ukladzie xy globalnym sa inne niz w ukladzie ksieta wiec musze przez detJ wymnozyc
+
+
+    // z XY na KSIETA jakobianem
+    // z KSIETA na XY odwroconym jakobianem
+    private void initJakobianAndInterpolate() {
+
         dNdX = new Double[arraySizeBasedOnPointsOfIntegral][4];
         dNdY = new Double[arraySizeBasedOnPointsOfIntegral][4];
-        // macierz jakobiego
-        Double[][] matrx = new Double[2][2];
 
+        Double[][] InvertedJakobianMatrix = new Double[2][2];
+        Double[][] JakobianMatrix = new Double[2][2];
 
         for (int i =0; i< arraySizeBasedOnPointsOfIntegral;i++) {
 
             // wyznaczenie danych do macierzy jakobiego
-
+            // punkt w macierzy jakobiego dXdKsi = PochodnaFunkcjiKsztaltuPoKsi(P_calkowania1)*P_calkowania1 + ...
             Double dXdKsi = dNdKsi[i][0] * x[0] + dNdKsi[i][1] * x[1] + dNdKsi[i][2] * x[2] + dNdKsi[i][3] * x[3];
             Double dXdEta = dNdEta[i][0] * x[0] + dNdEta[i][1] * x[1] + dNdEta[i][2] * x[2] + dNdEta[i][3] * x[3];
             Double dYdKsi = dNdKsi[i][0] * y[0] + dNdKsi[i][1] * y[1] + dNdKsi[i][2] * y[2] + dNdKsi[i][3] * y[3];
             Double dYdEta = dNdEta[i][0] * y[0] + dNdEta[i][1] * y[1] + dNdEta[i][2] * y[2] + dNdEta[i][3] * y[3];
 
-
-
-            Double[][] matrix2 = new Double[2][2];
-
             // macierz jakobiego
-            matrix2[0][0] = dXdEta;
-            matrix2[0][1] = dYdEta;
-            matrix2[1][0] = dXdKsi;
-            matrix2[1][1] = dYdKsi;
+            JakobianMatrix[0][0] = dXdEta;
+            JakobianMatrix[0][1] = dYdEta;
+            JakobianMatrix[1][0] = dXdKsi;
+            JakobianMatrix[1][1] = dYdKsi;
 
-            // odwrocona macierz jakobiego
-            matrx[0][0] = dYdKsi;
-            matrx[0][1] = -dYdEta;
-            matrx[1][0] = -dXdKsi;
-            matrx[1][1] = dXdEta;
+            // odwrocona macierz jakobiego  (jeszcze tutaj razy 1/detJ ofc zeby byla dokladnie odwrotne)
+            InvertedJakobianMatrix[0][0] = dYdKsi;
+            InvertedJakobianMatrix[0][1] = -dYdEta;
+            InvertedJakobianMatrix[1][0] = -dXdKsi;
+            InvertedJakobianMatrix[1][1] = dXdEta;
 
             // dodaje wyznacznik do tabeli wyznacznikow
-            dets[i] = MatrixCalculator.detMatrx2x2(matrx);
+            dets[i] = MatrixCalculator.detMatrx2x2(InvertedJakobianMatrix);
 
             // mnozy kazdy element odwroconej macierzy jakobiego przez 1/det
-            matrx = MatrixCalculator.multiplyMatrixByValue(matrx,1.0/dets[i]);
+            InvertedJakobianMatrix = MatrixCalculator.multiplyMatrixByValue(InvertedJakobianMatrix,1.0/dets[i]);
 
             // oblicza dNdX dNdY dla danego punktu calkowania
+            // interpolacja z ukladu ksieta na uklad XY za pomocą wzoru na interpolacje oraz macierzy jakobiego
             for (int k = 0; k < 4; k++) {
-                dNdX[i][k] = (matrx[1][1]*dNdKsi[i][k] + matrx[1][0]*dNdEta[i][k]) ;
-                dNdY[i][k] = (matrx[0][1]*dNdKsi[i][k] + matrx[0][0]*dNdEta[i][k]) ;
+                dNdX[i][k] = (InvertedJakobianMatrix[1][1]*dNdKsi[i][k] + InvertedJakobianMatrix[1][0]*dNdEta[i][k]) ;
+                dNdY[i][k] = (InvertedJakobianMatrix[0][1]*dNdKsi[i][k] + InvertedJakobianMatrix[0][0]*dNdEta[i][k]) ;
            }
         }
     }
 
+    // Poszczególne macierze H to wartości funkcji
+    //w punktach całkowania.
     private void calcListofMatrixesH(){
 
         // tworzy liste macierzy H (1 macierz H dla 1 punktu)
         HMatrixesList = new ArrayList<>(arraySizeBasedOnPointsOfIntegral);
+
         Double[] tempInputX = new Double[4];
         Double[] tempInputY = new Double[4];
         Double[][] matrixH;
 
         for(int i =0; i<arraySizeBasedOnPointsOfIntegral;i++){
-
+            // pobiera dla kazdego punktu calkowania odpowiedni wektor
             for (int j = 0; j < 4; j++) {
                 tempInputX[j] = dNdX[i][j];
                 tempInputY[j] = dNdY[i][j];
             }
 
-
+            // wektor jest mnozony przez wlasna transpozycje
             Double[][] tempDNDX = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputX);
             Double[][] tempDNDY = MatrixCalculator.multiplyVectorByItsOwnTranspose(tempInputY);
 
+            // dodaje macierze dndx dndy
             matrixH = MatrixCalculator.addMatrices(tempDNDX,tempDNDY);
-
+            // mnoze razy wyznacznik jakobiego (we wzorze to jest dV! ale dajemy detJ
+            // oraz conductivity
+            // dV to objetosc?
             matrixH = MatrixCalculator.multiplyMatrixByValue(matrixH,kt*dets[i]);
 
+            // dodaje do listy macierzy H
             HMatrixesList.add(matrixH);
         }
 
     }
-
+    //Poszczególne macierze H to wartości funkcji
+    //w punktach całkowania. Celem obliczenia
+    //całki należy przemnożyć je przez
+    //odpowiednie wagi.
     private void calculateFinalHforElement(){
         GaussTable gaussTable = new GaussTable(pointsOfIntegral);
         int weightX = 0;
@@ -254,6 +282,8 @@ public class ElementUniversal {
 
     }
 
+
+    //
     private void calcHBCandP() {
         Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
         Hbc = surface.getFinalHBC();
@@ -311,10 +341,7 @@ public class ElementUniversal {
     }
 
 
-    private Double funKsztaltu1(Double eta, Double ksi){
-
-        return 0.25*(1.0-ksi)*(1.0-eta);
-    }
+    private Double funKsztaltu1(Double eta, Double ksi){  return 0.25*(1.0-ksi)*(1.0-eta); }
     private Double funKsztaltu2(Double eta, Double ksi){
         return 0.25*(1.0+ksi)*(1.0-eta);
     }
@@ -325,6 +352,7 @@ public class ElementUniversal {
         return 0.25*(1.0-ksi)*(1.0+eta);
     }
 
+    // pochodne funkcji ksztaltu wzgledem ksi oraz eta
     private double dN1dS(Double eta){
         return -0.25*(1.0-eta);
     }
@@ -338,7 +366,6 @@ public class ElementUniversal {
         return -0.25*(1.0+eta);
     }
 
-    // η - eta
     private double dN1dn(Double ksi){
         return -0.25*(1.0-ksi);
     }
@@ -349,6 +376,8 @@ public class ElementUniversal {
     private double dN4dn(Double ksi){
         return 0.25*(1.0-ksi);
     }
+
+
 
     public Double[][] getHbc() {
         return Hbc;

@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="MES DZIALA!">
-      <change afterPath="$PROJECT_DIR$/src/Data/Simulation.java" afterDir="false" />
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Refractor v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/SOE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/SOE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IO/ExportToTVKFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/ExportToTVKFiles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +135,8 @@
       <workItem from="1702630055067" duration="960000" />
       <workItem from="1702631058464" duration="8000" />
       <workItem from="1702638882240" duration="788000" />
-      <workItem from="1702901176558" duration="3497000" />
+      <workItem from="1702901176558" duration="3660000" />
+      <workItem from="1702980450081" duration="9035000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -288,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702630874568</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Refractor v1">
+      <created>1702904866208</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702904866208</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +332,7 @@
     <MESSAGE value="Added eq" />
     <MESSAGE value="do poprawy xD" />
     <MESSAGE value="MES DZIALA!" />
-    <option name="LAST_COMMIT_MESSAGE" value="MES DZIALA!" />
+    <MESSAGE value="Refractor v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refractor v1" />
   </component>
 </project>

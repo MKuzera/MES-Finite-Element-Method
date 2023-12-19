@@ -29,7 +29,7 @@ public class Main {
         Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
         for (Element element : grid.elements) {
 
-            ElementUniversal elementUniversal = new ElementUniversal(2, element, GlobalData.conductivity, grid, GlobalData.alfa);
+            ElementUniversal elementUniversal = new ElementUniversal(4, element, GlobalData.conductivity, grid, GlobalData.alfa);
 
             element.setMatrixH(elementUniversal.getH());
             element.setMatrixHBC(elementUniversal.getHbc());

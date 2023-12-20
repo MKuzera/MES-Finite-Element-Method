@@ -5,7 +5,6 @@ import Gauss.GaussTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 
 public class Surface {
@@ -38,19 +37,15 @@ public class Surface {
         initValuesInCalcPoints();
         initDetJ();
         calcHBCandP();
-        //cut4x4to2x2HBCs();
-   //     System.out.println("HBC");
-    //    MatrixCalculator.printMatrix(finalHBC);
-    //    System.out.println("P");
-    //    MatrixCalculator.VECTORprint(finalP);
-   //     System.out.println();
+
+
 
 
 
     }
-
+    // detJ -> odleglosci pomiedzy punktami
     private void initDetJ() {
-       // element.createXYbasenOnPointXY();
+
 
         Double[] x = element.x;
         Double[] y = element.y;
@@ -59,13 +54,30 @@ public class Surface {
         listOfDetJ.add(calcDistance(x[1],y[1],x[2],y[2]));
         listOfDetJ.add(calcDistance(x[2],y[2],x[3],y[3]));
         listOfDetJ.add(calcDistance(x[3],y[3],x[0],y[0]));
-//        System.out.println(element.toString());
-//        System.out.println("DETJ");
-//        System.out.print(listOfDetJ + " \n");
+
 
 
     }
 
+
+
+    // Jak to dziala:
+    // Dla kazdej sciany wybiera odpowiednie funkcje ksztaltu
+    // i podstawia odpowiednie wartosci
+    // bierzemy POWIERZCHNIE elementu gdzie np mamy "lewa" sciane:
+    // wtedy ma ona zmienna lokalna ksi jako -1 no bo na powierzchni wiec minimalna
+    // druga zmienna jest punkt calkowania bo nie lezy ona an rogu tylko na bocznej scianie
+    // dla zadanej sciany licze funkcje ksztaltu i otrzymuje dla kazdego punktu calkowania macierz
+    // ktora zwiera wektory dla poszczegolnych punktow calkowania
+    // dla 2 pkt calkowania sa to 2 wektory ktore potem podstawiam do wzoru
+
+    //
+    // I
+    // x ()
+    // I
+    // x ()
+    // I
+    //   I  I  I  I  I
     private void initValuesInCalcPoints() {
         Double[][] tempSurface = new Double[calcPoints][4];
         for (int nrSurface = 0; nrSurface < 4; nrSurface++) {
@@ -105,20 +117,22 @@ public class Surface {
                 }
 
             }
-
+            // dodaj do listy scian
             listOfWalls.add(Arrays.stream(tempSurface)
                     .map(Double[]::clone)
                     .toArray(Double[][]::new));
 
-         //   System.out.println("surface " + nrSurface);
-         //   MatrixCalculator.printMatrix(tempSurface);
+
 
 
 
         }
     }
 
-
+    // majac gotowe wartosci funkcji ksztaltu dla kazdej z scian
+    // licze macierze HBC oraz P. Wybieram tylko te wierzcholki ktore sa powierzchniowe
+    // tzn. sa na zewnatrz
+    //
     private void calcHBCandP() {
 
         for (int nrSurface = 0; nrSurface < 4; nrSurface++) {
@@ -126,21 +140,22 @@ public class Surface {
 
             int node1 = element.ID.get(nrSurface);
             int tempnumber = nrSurface + 1;
+            // nie ma wierzcholka 4 tylko jest wierzcholek 0
             if (tempnumber > 3) tempnumber = 0;
             int node2 = element.ID.get(tempnumber);
 
 
+            // sprawdz czy jest zewnetrzny
+            if (GlobalData.BC.contains(node1) && GlobalData.BC.contains(node2)) {
 
-            if (GlobalData.DC.contains(node1) && GlobalData.DC.contains(node2)) {
-//                System.out.println("\n");
-//                System.out.print(node1);
-//                System.out.print(" ");
-//                System.out.print(node2);
-
-
+                // przechowuja HBC1 HBC2 ...
                 ArrayList<Double[][]> lisofTempsHBC = new ArrayList<>(calcPoints);
                 ArrayList<Double[]> lisofTempsP = new ArrayList<>(calcPoints);
 
+                // dla kazdego punktu calkowania:
+                // hbc -> wektor pomnoz przez wlasna transpozycje
+                // a nastepnie wymnoz przez odpowiednia wage oraz alfe
+                // P -> wektor wymnoz razy odpowiednia wage * TempOtoczenia * alfa
                 for (int i = 0; i < calcPoints; i++) {
                     Double[][] temp =  listOfWalls.get(nrSurface);
                     temp = MatrixCalculator.multiplyVectorByItsOwnTranspose(temp[i]);
@@ -152,26 +167,26 @@ public class Surface {
                     tempP = MatrixCalculator.VECTORmultiply(temp[i],gaussTable.weights.get(i) * GlobalData.Tot * alfa);
                     lisofTempsP.add(tempP);
                 }
-
+                // sumy HBC1 HBC2...
                 Double[][] temp = MatrixCalculator.zeros(4, 4);
                 Double[] tempP = MatrixCalculator.VECTORzeros(4);
-
+                // sumowanie wszytskich macierzy dla kazdego punktu calkowania
                 for (int i = 0; i < calcPoints; i++) {
                     temp = MatrixCalculator.addMatrices(temp, lisofTempsHBC.get(i));
                     tempP = MatrixCalculator.VECTORadd(tempP,lisofTempsP.get(i));
                 }
 
-
+                // pomnoz razy detJ (dv)
                 temp = MatrixCalculator.multiplyMatrixByValue(temp, listOfDetJ.get(nrSurface));
                 tempP = MatrixCalculator.VECTORmultiply(tempP,listOfDetJ.get(nrSurface));
 
-//                System.out.println("HBC: ");
-//                MatrixCalculator.printMatrix(temp);
-//                System.out.println("P: ");
-//                MatrixCalculator.VECTORprint(tempP);
+
+                // koncowa macierz HBC oraz P jest suma wszytskich macierzy ktore powstaja dla danego elementu
+                // czyli bedzie 0000 jesli zadne 2 sasiednie wierzchloki nie granicza
+                // jak tylko 1 sciana graniczy to sie raz doda
+                // jak wiecej scian graniczy to sie wiecej doda np rog
                 finalHBC = MatrixCalculator.addMatrices(finalHBC, temp);
                 finalP = MatrixCalculator.VECTORadd(finalP,tempP);
-
             }
 
 

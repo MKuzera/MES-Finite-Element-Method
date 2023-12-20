@@ -235,5 +235,30 @@ public abstract class MatrixCalculator {
         }
         return result;
     }
+    public static Double findMax(Double[] tablica) {
+
+        Double maksimum = tablica[0];
+
+        for (int i = 1; i < tablica.length; i++) {
+            if (tablica[i] > maksimum) {
+                maksimum = tablica[i];
+            }
+        }
+
+        return maksimum;
+    }
+
+   public static Double findMin(Double[] tablica) {
+
+        Double minimum = tablica[0];
+
+        for (int i = 1; i < tablica.length; i++) {
+            if (tablica[i] < minimum) {
+                minimum = tablica[i];
+            }
+        }
+
+        return minimum;
+    }
 
 }

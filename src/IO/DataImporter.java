@@ -188,12 +188,12 @@ public abstract class DataImporter {
             s.trim();
             temp.add(Integer.parseInt(s.trim()));
         }
-        GlobalData.setDC(temp);
+        GlobalData.setBC(temp);
     }
 
     private static void setDCtoNodes(){
         for (Node node: GlobalData.nodes ) {
-            if(GlobalData.DC.contains(node.ID)){
+            if(GlobalData.BC.contains(node.ID)){
                 node.DC = 1;
             }
         }

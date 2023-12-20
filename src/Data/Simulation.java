@@ -5,6 +5,7 @@ import Gauss.GaussElimination;
 import IO.ExportToTVKFiles;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Simulation {
     private ArrayList<Double[]> TValuesInSimTime;
@@ -50,11 +51,22 @@ public class Simulation {
         TValuesInSimTime.remove(0); // 0 element to z t0 jako vector
 
     }
+    public void printMinMax(){
+
+        for (Double[] d: TValuesInSimTime) {
+
+            System.out.println("\n");
+            System.out.print( "MIN " + MatrixCalculator.findMin(d) + "MAX " + MatrixCalculator.findMax(d));
+        }
+    }
     public void printValues(){
         int k =0;
         for (Double[] d: TValuesInSimTime){
 
+
+
             System.out.println("\n");
+
             k++;
 
             for(int i = 0; i<GlobalData.nodesNumber;i++){
@@ -66,4 +78,5 @@ public class Simulation {
     public void export(){
         ExportToTVKFiles.export(TValuesInSimTime);
     }
+
 }

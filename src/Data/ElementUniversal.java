@@ -283,7 +283,7 @@ public class ElementUniversal {
     }
 
 
-    //
+    // uzywam klasy surface to oblcizenia ()
     private void calcHBCandP() {
         Surface surface = new Surface(pointsOfIntegral,element,alfa,grid);
         Hbc = surface.getFinalHBC();

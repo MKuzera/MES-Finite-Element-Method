@@ -15,7 +15,7 @@ public class Main {
         // "src\IO\Test3_31_31_kwadrat.txt"
 
         try {
-            DataImporter.importData("src\\IO\\Test2_4_4_MixGrid.txt");
+            DataImporter.importData("src\\IO\\Test3_31_31_kwadrat.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -45,6 +45,7 @@ public class Main {
 
         simulation.run(soe);
         simulation.printValues();
+        simulation.printMinMax();
         simulation.export();
 
     }

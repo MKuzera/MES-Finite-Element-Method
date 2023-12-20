@@ -14,13 +14,13 @@ public class Element {
     Double[][] matrixHBC;
     Double[] matrixP;
     Double[][] matrixC;
-
+    Double[] x; // needed for single element calc
+    Double[] y; // needed for single element calc
     public void setMatrixC(Double[][] matrixC) {
         this.matrixC = matrixC;
     }
 
-    Double[] x; // needed for single element calc
-    Double[] y; // needed for single element calc
+
 
     /**
      * <p>The Constructor creates a new Element with assigned IDs values of nodes that Element contains

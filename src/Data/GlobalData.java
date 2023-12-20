@@ -12,9 +12,9 @@ public abstract class GlobalData {
     public static double simulationStepTime;
     /** *Conductivity */
     public static double conductivity;
-    /** *Alfa */
+    /** *Alfa  */
     public static double alfa;
-    /** *Tot */
+    /** *Tot - temp otoczenia */
     public static double Tot;
     /** *initialTemp */
     public static double initialTemp;
@@ -30,15 +30,15 @@ public abstract class GlobalData {
     public static ArrayList<Node> nodes;
     /** *List of elements in the grid */
     public static ArrayList<Element> elements;
-    /** *DC */
-    public static ArrayList<Integer> DC;
+    /** *DC - Nodes that are Boundary */
+    public static ArrayList<Integer> BC;
 
-    public static ArrayList<Integer> getDC() {
-        return DC;
+    public static ArrayList<Integer> getBC() {
+        return BC;
     }
 
-    public static void setDC(ArrayList<Integer> DC) {
-        GlobalData.DC = DC;
+    public static void setBC(ArrayList<Integer> BC) {
+        GlobalData.BC = BC;
     }
 
     public static void setNodes(ArrayList<Node> nodes){
@@ -114,7 +114,7 @@ public abstract class GlobalData {
      */
     public static String DCToString(){
         StringBuilder s = new StringBuilder();
-        for (Integer integer: DC) {
+        for (Integer integer: BC) {
             s.append(integer.toString()).append(" ");
         }
         return s.toString();

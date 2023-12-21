@@ -49,7 +49,7 @@ public class Surface {
 
         Double[] x = element.x;
         Double[] y = element.y;
-
+        // L/2 zwraca
         listOfDetJ.add(calcDistance(x[0],y[0],x[1],y[1]));
         listOfDetJ.add(calcDistance(x[1],y[1],x[2],y[2]));
         listOfDetJ.add(calcDistance(x[2],y[2],x[3],y[3]));

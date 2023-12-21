@@ -28,14 +28,8 @@ public class SOE {
 
 
 
-        calcGlobalHandP(); // agregacja macierzy
+        calcGlobal_H_P_C(); // agregacja macierzy
 
-//        System.out.println("\nP ");
-//        MatrixCalculator.VECTORprint(GLOBALmatrixP);
-//        System.out.println("\nH ");
-//        MatrixCalculator.printMatrix(GLOBALmatrixH);
-//        System.out.println("\nC ");
-//        MatrixCalculator.printMatrix(GLOBALmatrixC);
 
     }
 
@@ -51,7 +45,7 @@ public class SOE {
         return GLOBALmatrixC;
     }
 
-    private void calcGlobalHandP() {
+    private void calcGlobal_H_P_C() {
 
 
         for (Element element: grid.elements) {

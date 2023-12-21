@@ -15,7 +15,7 @@ public class Main {
         // "src\IO\Test3_31_31_kwadrat.txt"
 
         try {
-            DataImporter.importData("src\\IO\\Test3_31_31_kwadrat.txt");
+            DataImporter.importData("src\\IO\\Test2_4_4_MixGrid.txt");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -29,7 +29,7 @@ public class Main {
         Grid grid = new Grid(GlobalData.elements, GlobalData.nodes);
         for (Element element : grid.elements) {
 
-            ElementUniversal elementUniversal = new ElementUniversal(4, element, GlobalData.conductivity, grid, GlobalData.alfa);
+            ElementUniversal elementUniversal = new ElementUniversal(3, element, GlobalData.conductivity, grid, GlobalData.alfa);
 
             element.setMatrixH(elementUniversal.getH());
             element.setMatrixHBC(elementUniversal.getHbc());

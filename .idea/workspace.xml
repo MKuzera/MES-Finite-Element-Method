@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="Added Teo info">
+    <list default="true" id="3b471080-795c-467f-b4cd-e3c0d934d775" name="Changes" comment="more info">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/ElementUniversal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/ElementUniversal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/GlobalData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/GlobalData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Simulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Simulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/SOE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/SOE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Surface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Surface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Functions/MatrixCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IO/DataImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/DataImporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,7 +138,10 @@
       <workItem from="1702638882240" duration="788000" />
       <workItem from="1702901176558" duration="3660000" />
       <workItem from="1702980450081" duration="9377000" />
-      <workItem from="1703067716336" duration="14149000" />
+      <workItem from="1703067716336" duration="14997000" />
+      <workItem from="1703145201310" duration="6591000" />
+      <workItem from="1703161132081" duration="573000" />
+      <workItem from="1703164694803" duration="3518000" />
     </task>
     <task id="LOCAL-00001" summary="Added: &#10;-DataImporter works for all types of Grids (4x4 .. 6x6 etc)&#10;-All data is saved in GlobalDats&#10;-">
       <created>1697615376809</created>
@@ -306,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702996374291</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="more info">
+      <created>1703089950933</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1703089950933</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,6 +353,7 @@
     <MESSAGE value="MES DZIALA!" />
     <MESSAGE value="Refractor v1" />
     <MESSAGE value="Added Teo info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Teo info" />
+    <MESSAGE value="more info" />
+    <option name="LAST_COMMIT_MESSAGE" value="more info" />
   </component>
 </project>

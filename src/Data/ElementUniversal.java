@@ -4,22 +4,7 @@ import Exceptions.BadPointsOfIntegralException;
 import java.util.ArrayList;
 import Functions.MatrixCalculator;
 import Gauss.GaussTable;
-/**
- * <p>
- * ElementUniversal is used to calculate the H matrix.
- * </p>
- *
- * The class is responsible for:
- *
- * <ul>
- *     <li>Inits ksi and eta Array for Calculating Jacobian Matrix</li>
- *     <li>Calculation of Jacobian Matrix</li>
- *     <li>Calculation of determinant of that Matrix</li>
- *     <li>Calculating dNdX and dNdY Matrices</li>
- *     <li>Calculating list of H matrices for each calculation point</li>
- *     <li>Calculation final H matrix</li>
- * </ul>
- */
+
 public class ElementUniversal {
 
     private Integer pointsOfIntegral;
@@ -52,15 +37,7 @@ public class ElementUniversal {
         return H;
     }
 
-    /**
-     * <p>
-     * Constructor creates a new Element Universal and Calculates matrix H for given parameters
-     * @param pointsOfIntegral number of points of integral
-     * @param kt parameter
-     * @param element element that will be calculated
-     * @param grid the global grid used in program
-     * </p>
-     */
+
     public ElementUniversal(int pointsOfIntegral,Element element,Double kt, Grid grid,Double alfa){
 
         if(pointsOfIntegral ==2 || pointsOfIntegral == 3 || pointsOfIntegral ==4) {
@@ -122,8 +99,6 @@ public class ElementUniversal {
     // ksi oraz eta w układzie 2d.
     // Wartości f / (f1 f2) są to wartości punktów całkowania z tablicy gausa.
     // to czy ma - czy + zależy czy leży powyżej/poniżej swojej osi czy może jest równe 0
-    // Potrzebne jest to po to aby przejsc z ukladu globalnego xy na uklad ksi/eta gdzie
-    // Bede mógł policzyć całke z powierzchni.
     private void initKsiEtaCalcPointsArray() {
         if(pointsOfIntegral == 2){
             Double f = Math.sqrt(1.0/3.0);
@@ -148,8 +123,6 @@ public class ElementUniversal {
     // dNdEta oraz dNdKsi są to tablice zawierające wartości funkcji kształtu dla danego punktu całkowania.
     // dNdEta[0],dNdKsi[0] zawieraja wartości funkcji kształtu dla 1 punktu całkowania w układzie
     // funkcje ksztaltu dla tego elementu istanieja tylko w ukladzie lokalnym
-    // potrzebujemy je w celu interpolowania wspolrzednych (nie mozemy calkowac dla ukladu globalnego x,y gdzie nie wiemy
-    // jaki punkt całkowania mamy uzyc)
     private void initdNdKsidNdEta() {
         // innits the dNdKsi and dNdEta matrix
         for(int i =0;i<arraySizeBasedOnPointsOfIntegral;i++) {
@@ -167,10 +140,10 @@ public class ElementUniversal {
 
     // Obliczenie Jakobianu dla elementu. Macierz jakobiego/macierz przeksztalcenia
     // Jakobian przeksztalcenia detJ jest to macierz pochodnych czastkowych odwzorowania geometrycznego
-    // czyli dzieki niemu wiemy jak zachowac dlugosc? wag? a bardziej proporcje pomiedzy naszym elementem w xy a elementem w ksi eta (uklad globalny -> lokalny)
+    // czyli dzieki niemu wiemy jak zachowac pomiedzy naszym elementem w xy a elementem w ksi eta (uklad globalny -> lokalny)
     //
     // Macierz jakobiego mowi jak geometrycznie zmienil sie element uklad xy wzgledem ukladu ksieta
-    // rowniez interpoluje z wsp ksieta na wsp XY
+    // rowniez tu interpoluje z wsp ksieta na wsp XY
     // wagi w ukladzie xy globalnym sa inne niz w ukladzie ksieta wiec musze przez detJ wymnozyc
 
 

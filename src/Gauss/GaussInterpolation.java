@@ -1,18 +1,9 @@
 package Gauss;
 import Functions.*;
 
-/**
- * <p>GaussInterpolation is a class that is used to interpolate function in one or two dimensional space
- * </p>
- */
+
 public abstract class GaussInterpolation {
-    /**
-     * Calculates the interpolation of a function in one-dimensional space using Gauss quadrature.
-     *
-     * @param k The number of points in the Gauss quadrature.
-     * @param f The one-dimensional function to interpolate.
-     * @return The interpolated value.
-     */
+
     public static double calculateX(int k, MyFunctionX f){
         GaussTable gaussTable = new GaussTable(k);
         double result = 0.0;
@@ -22,13 +13,7 @@ public abstract class GaussInterpolation {
         }
          return result;
     }
-    /**
-     * Calculates the interpolation of a function in two-dimensional space using Gauss quadrature.
-     *
-     * @param k The number of points in the Gauss quadrature.
-     * @param f The two-dimensional function to interpolate.
-     * @return The interpolated value.
-     */
+
     public static double calculateXY(int k, MyFunctionXY f){
         GaussTable gaussTable = new GaussTable(k);
         double result = 0.0;

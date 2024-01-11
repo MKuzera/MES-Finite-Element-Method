@@ -1,10 +1,7 @@
 package Data;
 
 import java.util.ArrayList;
-/**
- * <p>This class is a container of all data needed to start a simulation</p>
- *
- */
+
 public abstract class GlobalData {
     /** *Simulation time */
     public static double simulationTime;
@@ -86,10 +83,7 @@ public abstract class GlobalData {
     public static void setElementsNumber(int elementsNumber) {
         GlobalData.elementsNumber = elementsNumber;
     }
-    /**
-     * <p>This method creates a string of Nodes</p>
-     * @return all nodes as String
-     */
+
     public static String nodesToString(){
        StringBuilder s = new StringBuilder();
         for (Node node: nodes) {
@@ -97,10 +91,7 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
-    /**
-     * <p>This method creates a string of Elements</p>
-     * @return all Elements as String
-     */
+
     public static String elementsToString(){
         StringBuilder s = new StringBuilder();
         for (Element element: elements) {
@@ -108,10 +99,7 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
-    /**
-     * <p>This method creates a string of DC points</p>
-     * @return all points as String
-     */
+
     public static String DCToString(){
         StringBuilder s = new StringBuilder();
         for (Integer integer: BC) {
@@ -119,10 +107,7 @@ public abstract class GlobalData {
         }
         return s.toString();
     }
-    /**
-     * <p>This method creates a string of all data that class contains</p>
-     * @return string with summary of what class contains
-     */
+
     public static String getDescription() {
         return  "simulationTime : " + simulationTime +
                 "\nsimulationStepTime : " + simulationStepTime +

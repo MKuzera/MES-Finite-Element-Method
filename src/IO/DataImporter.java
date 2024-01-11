@@ -8,30 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-/**
- * <p>
- * This class provides methods needed for importing data from a given file and processing data into the Data.GlobalData class
- * </p>
- * Currently works only for the following files:
- * <ul>
- *   <li>Test1_4_4.txt</li>
- *   <li>Test2_4_4_MixGrid.txt</li>
- *   <li>Test3_31_31_kwadrat.txt</li>
- * </ul>
- */
+
 public abstract class DataImporter {
 
 
     private static ArrayList<Node> nodes;
     private static ArrayList<Element> elements;
-    /**
-     * <p>
-     * This method imports data from the given filename and exports processed data into Data.GlobalData.
-     * </p>
-     * @param fileName The given fileName.
-     * @throws FileNotFoundException when the file is not found.
-     * @throws RuntimeException when there is a problem with IO.
-     */
+
     public static void importData(String fileName) throws FileNotFoundException {
 
         ArrayList<String> allLines = new ArrayList<>();
@@ -59,28 +42,15 @@ public abstract class DataImporter {
         initDC(allLines.get(allLines.size() -1));
         setDCtoNodes();
     }
-    /**
-     * <p>
-     *This method initialize ArrayList of Nodes based on nodesNumber from Data.GlobalData
-     * </p>
-     */
+
     private static void initializeNodes(){
         nodes = new ArrayList<>(GlobalData.nodesNumber);
     }
-    /**
-     * <p>
-     *This method initialize ArrayList of Elements based on elementNumber from Data.GlobalData
-     * </p>
-     */
+
     private static void initializeElements(){
         elements = new ArrayList<>(GlobalData.elementsNumber);
     }
-    /**
-     * <p>
-     *This method process lines to elements for ArrayList and exports List to Data.GlobalData as elements
-     * </p>
-     * @param strings ArrayList of lines (each line contains data for one element)
-     */
+
     private static void addElements(ArrayList<String> strings) {
         for (String string:strings) {
             String[] line = string.split(",");
@@ -108,12 +78,7 @@ public abstract class DataImporter {
         }
         GlobalData.setElements(elements);
     }
-    /**
-     * <p>
-     *This method process lines to nodes for ArrayList and exports List to Data.GlobalData as nodes
-     * </p>
-     * @param strings ArrayList of lines (each line contains data for one node)
-     */
+
     private static void addNodes(ArrayList<String> strings) {
         for (String string:strings) {
             String[] line = string.split(",");
@@ -135,12 +100,6 @@ public abstract class DataImporter {
         GlobalData.setNodes(nodes);
     }
 
-    /**
-     * <p>
-     *This method process lines to data used in Data.GlobalData
-     * </p>
-     * @param lines list of strings to be processed
-     */
     private static void implementGlobalData(ArrayList<String> lines){
 
         GlobalData.setSimulationTime(getDoubleNumberFromLine(lines.get(0)));
@@ -155,32 +114,17 @@ public abstract class DataImporter {
         GlobalData.setElementsNumber(getIntNumberFromLine(lines.get(9)));
 
     }
-    /**
-     * <p>
-     *Return first int found in line(String)
-     * </p>
-     * @param line line in which we find int
-     */
+
     private static int getIntNumberFromLine(String line){
         String numberOnly= line.replaceAll("[^0-9]", "");
         return Integer.parseInt(numberOnly);
     }
-    /**
-     * <p>
-     *Return first double found in line(String)
-     * </p>
-     * @param line line in which we find double
-     */
+
     private static double getDoubleNumberFromLine(String line){
         String numberOnly= line.replaceAll("[^0-9.]", "");
         return Double.parseDouble(numberOnly);
     }
-    /**
-     * <p>
-     *This method process String line containing a list of DC points to an ArrayList and exports this Array to Data.GlobalData
-     * </p>
-     * @param line Given line with list of DC like (1 2 3 4...)
-     */
+
     private static void  initDC(String line){
         String[] lineSplited = line.split(",");
         ArrayList<Integer> temp = new ArrayList<>();

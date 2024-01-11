@@ -6,23 +6,22 @@ public abstract class GaussElimination {
         int N = B.length;
         for (int k = 0; k < N; k++)
         {
-            /** find pivot row **/
+
             int max = k;
             for (int i = k + 1; i < N; i++)
                 if (Math.abs(A[i][k]) > Math.abs(A[max][k]))
                     max = i;
 
-            /** swap row in A matrix **/
+
             Double[] temp = A[k];
             A[k] = A[max];
             A[max] = temp;
 
-            /** swap corresponding values in constants matrix **/
+
             Double t = B[k];
             B[k] = B[max];
             B[max] = t;
 
-            /** pivot within A and B **/
             for (int i = k + 1; i < N; i++)
             {
                 Double factor = A[i][k] / A[k][k];
@@ -32,10 +31,10 @@ public abstract class GaussElimination {
             }
         }
 
-        /** Print row echelon form **/
+
        // printRowEchelonForm(A, B);
 
-        /** back substitution **/
+
         Double[] solution = new Double[N];
         for (int i = N - 1; i >= 0; i--)
         {
@@ -44,7 +43,7 @@ public abstract class GaussElimination {
                 sum += A[i][j] * solution[j];
             solution[i] = (B[i] - sum) / A[i][i];
         }
-        /** Print solution **/
+
         return solution;
      //   printSolution(solution);
     }
@@ -60,7 +59,7 @@ public abstract class GaussElimination {
         }
         System.out.println();
     }
-    /** function to print solution **/
+
     public void printSolution(double[] sol)
     {
         int N = sol.length;

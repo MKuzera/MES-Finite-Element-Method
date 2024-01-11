@@ -3,11 +3,7 @@ import Exceptions.BadDataException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- * <p>GaussTable is a class that provides ArrayLists of weights (wi) and points (xi) based on number of points provided
- * </p>
- * Only supports 2,3,4 point Quadrature
- */
+
 public class GaussTable {
 
     public ArrayList<Double> pointsNum = new ArrayList<Double>();
@@ -18,11 +14,7 @@ public class GaussTable {
 
     private int numberOfPointsVar;
 
-    /**
-     * Constructor that generates pointsNum and weights based on the number of points entered. Only supports 2, 3, 4 points.
-     *
-     * @param numberOfPoints The number of points for Gauss quadrature.
-     */
+
 
     public GaussTable(int numberOfPoints){
         numberOfPointsVar = numberOfPoints;

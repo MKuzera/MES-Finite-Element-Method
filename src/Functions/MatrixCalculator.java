@@ -5,18 +5,9 @@ import java.nio.DoubleBuffer;
 import java.util.Arrays;
 import java.util.Objects;
 
-/**
- * <p>MatrixCalculator is a simple calculator used to calculate <b>two-dimensional matrices</b> in an application.
- * </p>
- */
+
 public abstract class MatrixCalculator {
-    /**
-     * <p> Method that multiply Double vector by its transpose
-     * </p>
-     *
-     * @param vector is a one dim Double Matrix
-     * @return returns two dim Double Matrix
-     */
+
     public static Double[][] multiplyVectorByItsOwnTranspose(Double[] vector) {
         int length = vector.length;
 
@@ -30,14 +21,7 @@ public abstract class MatrixCalculator {
 
         return result;
     }
-    /**
-     * <p> Method that adds 2 two-dimensional Double matrices
-     * </p>
-     *
-     * @param matrix1 First Double matrix
-     * @param matrix2 Second Double matrix
-     * @return returns two-dimensional Double matrix: sum of matrix1 and matrix2
-     */
+
     public static Double[][] addMatrices(Double[][] matrix1, Double[][] matrix2) {
         int rows = matrix1.length;
         int cols = matrix1[0].length;
@@ -51,14 +35,7 @@ public abstract class MatrixCalculator {
         }
         return result;
     }
-    /**
-     * <p> Method that multiplies two-dimensional matrix by value
-     * </p>
-     *
-     * @param matrix Matrix to be multiplied
-     * @param value Value to multiply by
-     * @return returns two-dimensional Double matrix: multiply of matrix by value
-     */
+
     public static Double[][] multiplyMatrixByValue(Double[][] matrix, Double value) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -72,12 +49,7 @@ public abstract class MatrixCalculator {
         }
         return result;
     }
-    /**
-     * <p> Method that displays in the console matrix
-     * </p>
-     *
-     * @param matrix Matrix to be displayed
-     */
+
     public static void printMatrix(Double[][] matrix) {
         for (Double[] row : matrix) {
             for (Double element : row) {
@@ -99,14 +71,7 @@ public abstract class MatrixCalculator {
 
 
 
-                                      /**
-     * <p> Method that creates and returns two-dimensional matrix filled with (Double) 0.0 values
-     * </p>
-     *
-     * @param sizeX number of rows
-     * @param sizeY number of columns
-     * @return returns two-dimensional matrix of given size filled with (Double) 0.0 values
-     */
+
     public static Double[][] zeros(int sizeX, int sizeY){
         Double[][] temp = new Double[sizeX][sizeY];
         for (int i = 0; i < sizeX; i++) {
@@ -119,14 +84,6 @@ public abstract class MatrixCalculator {
 
 
 
-    /**
-     * <p> Method that calculates the determinant of two-dimensional matrix
-     * </p>
-     *
-     * @param matrx Two-Dimensional matrix
-     *
-     * @return returns the determinant of the given matrix
-     */
     public static Double detMatrx2x2(Double[][] matrx){
         return matrx[0][0] * matrx[1][1] - matrx[1][0] * matrx[0][1];
     }
